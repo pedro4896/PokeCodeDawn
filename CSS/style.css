@@ -1,0 +1,25 @@
+body{
+    background-color: #000;
+}
+
+div#pokedex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+area{
+    cursor: pointer;
+    outline: none;
+}
+
+button{
+    position: absolute;
+    top: 65%;
+    left: 34%;
+    width: 80px;
+    border-radius: 5px;
+    box-shadow: 3px 2px 1px #252525;
+}
