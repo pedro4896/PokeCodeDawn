@@ -1,8 +1,18 @@
+@font-face {
+    font-family: pokemon;
+    src: url(../Font/Pokemon\ Solid.ttf);
+}
+
+*{
+    font-family: pokemon;
+    letter-spacing: 2px;
+}
+
 body{
     background-color: #000;
 }
 
-div#pokedex{
+#posicionamento{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,16 +20,74 @@ div#pokedex{
     text-align: center;
 }
 
-area{
-    cursor: pointer;
-    outline: none;
+#pokedex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 60%;
+    background: linear-gradient(#D30A40,#790b29,#91062b);
+    background-color: #790b29;
+    box-shadow: 3px 2px 1px #000;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: scroll; 
+    scrollbar-width: thin; /* para navegadores Firefox */
+    scrollbar-color: transparent transparent; /* para navegadores Chrome, Safari, Edge */
 }
 
-button{
-    position: absolute;
-    top: 65%;
-    left: 34%;
-    width: 80px;
+/* Personaliza a aparência da barra de rolagem */
+#pokedex::-webkit-scrollbar{
+    width: 8px; /* largura da barra de rolagem */
+}
+
+#pokedex::-webkit-scrollbar-track{
+    background-color: transparent; /* cor de fundo da barra de rolagem */
+}
+
+#pokedex::-webkit-scrollbar-thumb{
+    background-color: transparent; /* cor da alça da barra de rolagem */
+}
+
+.item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
     border-radius: 5px;
-    box-shadow: 3px 2px 1px #252525;
+    color: #000;
+    font-weight: bold;
+    filter: drop-shadow(5px 5px 5px #000);
+    background-color: #A8A878;
+}
+
+.item img{
+    order: 2;
+    width: 100%;
+    height: 67%;
+    padding: 3px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+.item span{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+#ordem{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    order: 1;
+    width: auto;
+    height: 20px;
+    margin-bottom: 3px;
+    padding-right: 5px;
 }
