@@ -141,7 +141,6 @@ function exibePokemon() {
     let substituicao; let corBack; let item;
     let posicao; let numeroPokemon; let nome;
     let img; let pokemon; let order;
-    
     for (let index = 1; index < 22; index++){
         setTimeout(function () {
             if(index >= 1010){
