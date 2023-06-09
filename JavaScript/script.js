@@ -5,7 +5,6 @@ var src;
 var dados;
 const posicionamento = document.getElementById('posicionamento');
 const pokedex = document.getElementById('pokedex');
-const pokemon = document.getElementById("pokemon");
 
 const cores = {
     Normal:[
@@ -256,20 +255,16 @@ function visualizarPokemon(event){
        element.style.display = 'none';
     });
 
-    const pokemon = event.target.getAttribute('data-Pokemon');
+    const visualizarPokemon = document.getElementById('visualizarPokemon');
+    visualizarPokemon.style.display = 'flex';
+    const numeroPokemon = event.target.getAttribute('data-Pokemon');
     const posicaoPokemon = event.target.getAttribute('data-posicao');
-    let url = 'https://pokeapi.co/api/v2/pokemon/'+pokemon+'/';
+    let url = 'https://pokeapi.co/api/v2/pokemon/'+numeroPokemon+'/';
+
     requisitarDados(url)
     .then(data => {
-        let container; let src; let nome; let img; let order; let nomenclatura;
-        let caracteristicas; let habilidades; let descricao; let peso; let altura;
-        let ul; let li;
+        console.log(data);
         nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-        let pokedex = document.getElementById('pokedex');
-        const background = event.target.getAttribute('data-cor');
-        container = document.createElement('div');
-        container.setAttribute('id','visualizarPokemon');
-        container.style.backgroundColor = 'black';
 
         if (data.sprites.other.dream_world.front_default != undefined){
             src = data.sprites.other.dream_world.front_default;  
@@ -279,43 +274,61 @@ function visualizarPokemon(event){
             src = './imagens/interrogacao.png';
         }
 
-        order = document.createElement('span');
-        order.setAttribute('id','ordem');
+        const order = document.querySelector('#visualizarPokemon #ordem');
         order.textContent = '#'+ posicaoPokemon;
 
-        // Criando o elemento img
-        img = document.createElement('img');
-        img.setAttribute('id','pokemon');
-        img.setAttribute('src', src);
-        img.setAttribute('title', nome);
-        img.setAttribute('alt', nome);
+        const img = document.querySelector('#visualizarPokemon #pokemon')
+        img.setAttribute('src', src); img.setAttribute('title', nome); img.setAttribute('alt', nome);
 
-        nomenclatura = document.createElement('span');
-        nomenclatura.setAttribute('id', 'nome');
+        const nomenclatura = document.querySelector('#visualizarPokemon #nome')
         nomenclatura.textContent = nome;
-        
-        
-        //Criando o elemento h5
-        caracteristicas = document.createElement('div');
-        caracteristicas.setAttribute('id','caracteristicas');
-        
-        peso = document.createElement('span');
-        peso.textContent = "Peso: " + (data.weight * 0.1).toFixed(1) + " kg";
 
-        altura = document.createElement('span');
-        altura.textContent = "Altura: " + (data.height * 0.1).toFixed(1) + " m";
+        // retorna o primeiro tipo de natureza do pokemon
+        const apiTipo = data.types;
+        const natureza = document.getElementById('natureza');
+        for (let index = 0; index < apiTipo.length; index++) {
+            entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
+                substituicao = tipos[match];
+                let elemento = document.createElement('span');
+                elemento.textContent = substituicao;
+                corBack = cores[substituicao.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][0];
+                elemento.style.backgroundColor = corBack;
+                natureza.appendChild(elemento);
+            });    
+        }
+                
+        const valorPeso = document.querySelector('#visualizarPokemon #caracteristicas #peso #valorPeso');
+        valorPeso.textContent = (data.weight * 0.1).toFixed(1) + " kg";
 
-        caracteristicas.appendChild(peso);
-        caracteristicas.appendChild(altura);
+        const valorAltura = document.querySelector('#visualizarPokemon #caracteristicas #altura #valorAltura');;
+        valorAltura.textContent = (data.height * 0.1).toFixed(1) + " m";
 
-        habilidades = document.createElement('span');
-        habilidades.setAttribute('id','habilidades');
-        habilidades.textContent = 'habilidades';
+        const hp = document.querySelector('#visualizarPokemon #status #container #valorStatus #hp');
+        hp.textContent = data.stats[0].base_stat + '/300';
+        hp.style.width = ((data.stats[0].base_stat / 300) * 100) + '%';
+        hp.style.backgroundColor = '#8CD750';
 
-        descricao = document.createElement('span');
-        descricao.setAttribute('id','descricao');
-        descricao.textContent = 'Descrição';
-        ul = document.createElement('ul');
+        const ataque = document.querySelector('#visualizarPokemon #status #container #valorStatus #ataque');
+        ataque.textContent = data.stats[1].base_stat + '/300';
+        ataque.style.width = ((data.stats[1].base_stat / 300) * 100) + '%';
+        ataque.style.backgroundColor = '#C03028';
+
+        const defesa = document.querySelector('#visualizarPokemon #status #container #valorStatus #defesa');
+        defesa.textContent = data.stats[2].base_stat + '/300';
+        defesa.style.width = ((data.stats[2].base_stat / 300) * 100) + '%';
+        defesa.style.backgroundColor = '#F08030';
+
+        const velocidade = document.querySelector('#visualizarPokemon #status #container #valorStatus #velocidade');
+        velocidade.textContent = data.stats[5].base_stat + '/300';
+        velocidade.style.width = ((data.stats[5].base_stat / 300) * 100) + '%';
+        velocidade.style.backgroundColor = '#78C0F8';
+
+        const exp = document.querySelector('#visualizarPokemon #status #container #valorStatus #exp');
+        exp.textContent = data.base_experience + '/1000';
+        exp.style.width = ((data.base_experience / 1000) * 100) + '%';
+        exp.style.backgroundColor = '#F8D030';
+
+        const ul = document.querySelector('#descricao ul');
         url = 'https://pokeapi.co/api/v2/pokemon-species/' + nome.toLowerCase();
         requisitarDados(url)
         .then(data => {
@@ -342,16 +355,6 @@ function visualizarPokemon(event){
                 }
             });
         })
-        descricao.appendChild(ul);
-        
-        // Adicionando a image e o título à div
-        container.appendChild(img);
-        container.appendChild(caracteristicas);
-        container.appendChild(order);
-        container.appendChild(nomenclatura);
-        container.appendChild(habilidades);
-        container.appendChild(descricao);
-        pokedex.appendChild(container);
     })
 }
 

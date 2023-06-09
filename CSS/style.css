@@ -37,7 +37,7 @@ header{
 
 #pokedex{
     position: absolute;
-    top: 7%;
+    top: 8%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -110,7 +110,7 @@ header{
 
 #visualizarPokemon{
     position: relative;
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
@@ -145,35 +145,106 @@ header{
     order: 3;
     width: 90%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-size: 1.5em;
+}
+
+#visualizarPokemon #natureza{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    order: 4;
+    width: 100%;
+}
+
+#visualizarPokemon #natureza span{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 0.9em;
+    width: 47%;
+    border-radius: 10px;
+    word-break: break-all;
+    padding-bottom: 8px;
 }
 
 #visualizarPokemon #caracteristicas{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    order: 4;
+    flex-direction: row;
+    justify-content: space-around;
+    order: 5;
     width: 90%;
     padding: 10px;
+    margin-top: 30px;
     margin-bottom: 10px;
+}
 
+#visualizarPokemon #caracteristicas #peso, #visualizarPokemon #caracteristicas #altura{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-grow: 0;
 }
 
 #visualizarPokemon #caracteristicas span{
     font-size: 0.8em;
-    margin-bottom: 10px;
+    margin-top: 1px;
 }
 
-#visualizarPokemon #habilidades{
-    order: 5;
-    width: 90%;
+#visualizarPokemon #status{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    order: 6;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
 }
 
+#visualizarPokemon #status .titulo{
+    order: 1;
+    text-align: center;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+#visualizarPokemon #status #container{
+    order: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#visualizarPokemon #status #container #nomeStatus{
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    text-align: center;
+}
+
+#visualizarPokemon #status #container #valorStatus{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#hp,#ataque,#defesa,#velocidade,#exp{
+    text-align: center;
+    font-size: 0.7em;
+    padding-left: 10px;
+}
+
+#visualizarPokemon #status #container #valorStatus .progress{
+    background-color: #262626;
+}
+
 #visualizarPokemon #descricao{
-    order: 6;
+    order: 7;
     flex-wrap: nowrap;
     flex-grow: 0;
     width: 100%;
