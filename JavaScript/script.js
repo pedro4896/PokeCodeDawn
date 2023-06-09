@@ -2,6 +2,7 @@ var total;
 var contador = 10000;
 var numeracao;
 var src;
+var dados;
 const posicionamento = document.getElementById('posicionamento');
 const pokedex = document.getElementById('pokedex');
 const pokemon = document.getElementById("pokemon");
@@ -112,28 +113,36 @@ const tipos = {
     unknown: 'Desconhecido',
 }
 
-function totalPokemon() {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')//('https://pokeapi.co/api/v2/pokemon/'+cont+'/')
-    .then(response => {
-        if(!response.ok){
+async function requisitarDados(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
             throw new Error('Erro ao fazer a requisição ' + response.status);
         }
-        return response.json();
-    })
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        // Trate o erro, se houver
+        console.log(error);
+    }  
+}
 
+function totalPokemon() {
+    let url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+    requisitarDados(url)
     .then(data => {
         // Retorna o total de recursos disponíveis na API
         total = data.count;
-        trocaPokemon();
+        exibePokemon();
     })
-    .catch(error => {
-        // Trate o erro, se houver
-        console.log(error);
-    });
-    
 }
 
-function trocaPokemon() {
+function exibePokemon() {
+    let url; let apiTipo; let entradaTipo;
+    let substituicao; let corBack; let item;
+    let posicao; let numeroPokemon; let nome;
+    let img; let pokemon; let order;
+    
     for (let index = 1; index < 22; index++){
         setTimeout(function () {
             if(index >= 1010){
@@ -144,27 +153,20 @@ function trocaPokemon() {
                 numeracao = index;
             }
 
-            fetch(('https://pokeapi.co/api/v2/pokemon/'+numeracao+'/'))
-            .then(response => {
-                if(!response.ok){
-                    throw new Error('Erro ao fazer a requisição ' + response.status);
-                }
-                return response.json();
-            })
-
+            url = 'https://pokeapi.co/api/v2/pokemon/'+numeracao+'/';
+            requisitarDados(url)
             .then(data => {
-                
                 // retorna o primeiro tipo de natureza do pokemon
-                let apiTipo = data.types[0].type.name;
+                apiTipo = data.types[0].type.name;
 
                 // retorna o nome do tipo em português
-                let entradaTipo = apiTipo.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
-                    let substituicao = tipos[match];
+                entradaTipo = apiTipo.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
+                    substituicao = tipos[match];
                     return substituicao;
                 });
                 
-                // retorna uma das 3 cores referênte ao tipo de pokemon
-                let corBack = cores[entradaTipo.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][numeroAleatorio()];
+                // retorna uma das 2 cores referênte ao tipo de pokemon
+                corBack = cores[entradaTipo.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][numeroAleatorio()];
 
                 if (data.sprites.other.dream_world.front_default != undefined){
                     src = data.sprites.other.dream_world.front_default;  
@@ -174,44 +176,52 @@ function trocaPokemon() {
                     src = './imagens/interrogacao.png';
                 }
  
-
-                var item = document.createElement('div');
+                item = document.createElement('div');
                 item.classList.add('item');
                 item.style.order = index;
                 item.style.cursor = 'pointer';
                 item.style.backgroundColor = corBack;
+                item.setAttribute('data-posicao', index);
+                item.setAttribute('data-cor', corBack);
 
-                var posicao = data.location_area_encounters;
+                posicao = data.location_area_encounters;
                 // Extrair o número entre "pokemon" e "encounters" usando expressões regulares
                 const regex = /pokemon\/(\d+)\/encounters/;
                 const matches = posicao.match(regex);
 
                 if (matches && matches.length > 1) {
-                    var numeroPokemon = matches[1];
+                    numeroPokemon = matches[1];
                 }
                 item.setAttribute('data-Pokemon', numeroPokemon);
                 
+                
 
                 // Criando o elemento img
-                var nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-                var img = document.createElement('img');
+                nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+                img = document.createElement('img');
                 img.setAttribute('id','pokemon');
                 img.setAttribute('src', src);
                 img.setAttribute('title', nome);
                 img.setAttribute('alt', nome);
                 img.setAttribute('data-Pokemon', numeroPokemon);
+                img.setAttribute('data-posicao', index);
+                img.setAttribute('data-cor', corBack);
                 
                 //Criando o elemento h5
-                var pokemon = document.createElement('span');
+                pokemon = document.createElement('span');
                 pokemon.setAttribute('id','name');
                 pokemon.style.order = 3;
-                pokemon.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+                pokemon.textContent = nome;
                 pokemon.setAttribute('data-Pokemon', numeroPokemon);
+                pokemon.setAttribute('data-posicao', index);
+                pokemon.setAttribute('data-cor', corBack);
 
-                var order = document.createElement('span');
+                order = document.createElement('span');
                 order.setAttribute('id','ordem');
                 order.textContent = '#'+ index;
                 order.setAttribute('data-Pokemon', numeroPokemon);
+                order.setAttribute('data-posicao', index);
+                order.setAttribute('data-cor', corBack);
 
                 // Adicionando a image e o título à div
                 item.appendChild(img);
@@ -230,10 +240,6 @@ function trocaPokemon() {
                 // Adiciona evento de click aos cards de pokemon
                 item.onclick = visualizarPokemon;
             })
-            .catch(error => {
-                // Trate o erro, se houver
-                console.log(error);
-            });   
         },500);  
     }
 }
@@ -244,13 +250,109 @@ function numeroAleatorio(){
 }
 
 function visualizarPokemon(event){
-    const posicaoPokemon = event.target.getAttribute('data-Pokemon');
-    console.log(posicaoPokemon);
-
+    pokedex.style.padding = '0px';
     const itens = document.querySelectorAll('.item');
     itens.forEach(element => {
        element.style.display = 'none';
     });
+
+    const pokemon = event.target.getAttribute('data-Pokemon');
+    const posicaoPokemon = event.target.getAttribute('data-posicao');
+    let url = 'https://pokeapi.co/api/v2/pokemon/'+pokemon+'/';
+    requisitarDados(url)
+    .then(data => {
+        let container; let src; let nome; let img; let order; let nomenclatura;
+        let caracteristicas; let habilidades; let descricao; let peso; let altura;
+        let ul; let li;
+        nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+        let pokedex = document.getElementById('pokedex');
+        const background = event.target.getAttribute('data-cor');
+        container = document.createElement('div');
+        container.setAttribute('id','visualizarPokemon');
+        container.style.backgroundColor = 'black';
+
+        if (data.sprites.other.dream_world.front_default != undefined){
+            src = data.sprites.other.dream_world.front_default;  
+        }else if(data.sprites.other['official-artwork'].front_default != undefined){
+            src = data.sprites.other['official-artwork'].front_default;
+        }else{
+            src = './imagens/interrogacao.png';
+        }
+
+        order = document.createElement('span');
+        order.setAttribute('id','ordem');
+        order.textContent = '#'+ posicaoPokemon;
+
+        // Criando o elemento img
+        img = document.createElement('img');
+        img.setAttribute('id','pokemon');
+        img.setAttribute('src', src);
+        img.setAttribute('title', nome);
+        img.setAttribute('alt', nome);
+
+        nomenclatura = document.createElement('span');
+        nomenclatura.setAttribute('id', 'nome');
+        nomenclatura.textContent = nome;
+        
+        
+        //Criando o elemento h5
+        caracteristicas = document.createElement('div');
+        caracteristicas.setAttribute('id','caracteristicas');
+        
+        peso = document.createElement('span');
+        peso.textContent = "Peso: " + (data.weight * 0.1).toFixed(1) + " kg";
+
+        altura = document.createElement('span');
+        altura.textContent = "Altura: " + (data.height * 0.1).toFixed(1) + " m";
+
+        caracteristicas.appendChild(peso);
+        caracteristicas.appendChild(altura);
+
+        habilidades = document.createElement('span');
+        habilidades.setAttribute('id','habilidades');
+        habilidades.textContent = 'habilidades';
+
+        descricao = document.createElement('span');
+        descricao.setAttribute('id','descricao');
+        descricao.textContent = 'Descrição';
+        ul = document.createElement('ul');
+        url = 'https://pokeapi.co/api/v2/pokemon-species/' + nome.toLowerCase();
+        requisitarDados(url)
+        .then(data => {
+            let desc = data.flavor_text_entries;
+            desc.forEach(element => {
+                if(element && element.language.name == 'en'){
+                    const texto = element.flavor_text;
+
+                    // Verificando se o texto já existe em algum elemento <li>
+                    let duplicado = false;
+                    const lista = ul.querySelectorAll('li');
+                    lista.forEach(el => {
+                        if(el.textContent === texto){
+                            duplicado = true;
+                            return;
+                        }
+                    });
+
+                    if(!duplicado){
+                        li = document.createElement('li');
+                        li.textContent = texto;
+                        ul.appendChild(li);
+                    }
+                }
+            });
+        })
+        descricao.appendChild(ul);
+        
+        // Adicionando a image e o título à div
+        container.appendChild(img);
+        container.appendChild(caracteristicas);
+        container.appendChild(order);
+        container.appendChild(nomenclatura);
+        container.appendChild(habilidades);
+        container.appendChild(descricao);
+        pokedex.appendChild(container);
+    })
 }
 
 totalPokemon();
