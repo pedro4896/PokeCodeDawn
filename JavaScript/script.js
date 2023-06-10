@@ -8,84 +8,84 @@ const pokedex = document.getElementById('pokedex');
 
 const cores = {
     Normal:[
-        '#A8A878', //(Cor: Couro)
-        '#C6C6A7' //(Cor: Bege)
+        '#704F30', //(Marrom-escuro)
+       ' #5A5141' //(Cinza-escuro)
     ],
     Fogo:[
-        '#F08030', //(Cor: Laranja)
-        '#E59448' //(Cor: Âmbar)
+        '#BB3322', //(Vermelho-escuro)
+        '#8B3D2A' //(Marrom-avermelhado)
     ],
     Agua:[
-        '#6890F0', //(Cor: Azul-piscina)
-        '#78C0F8' //(Cor: Azul-claro)
+        '#2D709A', //(Azul-escuro)
+        '#1C4A69' //(Azul-marinho)
     ],
     Grama:[
-        '#78C850', //(Cor: Verde-folha)
-        '#8CD750' //(Cor: Verde-claro)
+        '#3C8031', //(Verde-escuro)
+        '#2A5931' //(Verde-marinho)
     ],
     Eletrico:[
-        '#F8D030', //(Cor: Amarelo-elétrico)
-        '#F2D94E' //(Cor: Amarelo-pálido)
+        '#D5C34D', //(Amarelo-dourado)
+        '#A99639' //(Marrom-amarelado)
     ],
     Gelo:[
-        '#98D8D8', //(Cor: Azul-gelo)
-        '#BCE6E6' //(Cor: Azul-pálido)
+        '#78E8F3', //(Azul-claro)
+        '#50B4BF' //(Azul-turquesa)
     ],
     Lutador:[
-        '#C03028', //(Cor: Vermelho-luta)
-        '#D8675B' //(Cor: Vermelho-escuro)
+        '#9E4226', //(Marrom-avermelhado)
+        '#6D4D3B' //(Marrom-escuro)
     ],
     Venenoso:[
-        '#A040A0', //(Cor: Roxo-veneno)
-        '#C183C1' //(Cor: Roxo-claro)
+        '#8D4D8A', //(Roxo-escuro)
+        '#664B68' //(Roxo-escuro)
     ],
     Terrestre:[
-        '#E0C068', //(Cor: Marrom-terra)
-        '#EBD69D' //(Cor: Bege-claro)
+        '#957E59', //(Marrom-claro)
+        '#785C41'//(Marrom-escuro)
     ],
     Voador:[
-        '#A890F0', //(Cor: Roxo-céu)
-        '#C6B7F5' //(Cor: Lavanda)
+        '#86A7C3', //(Azul-claro)
+        '#647A89' //(Cinza-azulado)
     ],
     Psiquico:[
-        '#F85888', //(Cor: Rosa-psíquico)
-        '#FFA6C9' //(Cor: Rosa-claro)
+        '#A94496', //(Roxo-escuro)
+        '#823A76' //(Roxo-escuro)
     ],
     Inseto:[
-        '#A8B820', //(Cor: Verde-inseto)
-        '#C7D21F' //(Cor: Verde-claro)
+        '#A3A137', //(Verde-amarelado)
+        '#77741C' //(Verde-escuro)
     ],
     Pedra:[
-        '#B8A038', //(Cor: Marrom-pedra)
-        '#D6CCB1' //(Cor: Bege-claro)
+        '#926D48', //(Marrom-avermelhado)
+        '#674D3B' //(Marrom-escuro)
     ],
     Fantasma:[
-        '#705898', //(Cor: Roxo-fantasma)
-        '#A292BC' //(Cor: Lilás-escuro)
+        '#663A71', //(Roxo-escuro)
+        '#492F4C' //(Roxo-escuro)
     ],
     Dragao:[
-        '#7038F8', //(Cor: Roxo-dragão)
-        '#A890F0' //(Cor: Roxo-azulado)
+        '#983A6F', //(Rosa-escuro)
+        '#6B2C49' //(Vermelho-arroxeado)
     ],
     Noturno:[
-        '#705848', //(Cor: Marrom-noturno)
-        '#A8A878' //(Cor: Cinza-pardo)
+        '#533D3B', //(Marrom-escuro)
+        '#3C2D2B' //(Marrom-escuro)
     ],
     Sombrio:[
-        '#9C6363', //(Cor: Marrom-escuro)
-        '#5A5A5A' //(Cor: Cinza-escuro)
+        '#4D403E', //(Marrom-escuro)
+        '#362B29' //(Marrom-escuro)
     ],
     Metalico:[
-        '#B8B8D0', //(Cor: Prateado)
-        '#D1D1E0' //(Cor: Cinza-claro)
+        '#8C8C8C', //(Cinza)
+        '#646464' //(Cinza)
     ],
     Fada:[
-        '#EE99AC', //(Cor: Rosa-fada)
-        '#FFC0CB' //(Cor: Rosa-claro)
+        '#CE6EAC', //(Rosa-claro)
+        '#96506B' //(Roxo-escuro)
     ],
     Desconhecido:[
-        '#FFFFFF', //(Cor: Branco)
-        '#F0F0F0' //(Cor: Cinza-pálido)
+        '#C0C0C0', //(Cinza)
+        '#808080' //(Cinza-escuro)
     ]
 };
 
@@ -288,7 +288,7 @@ function visualizarPokemon(event){
         for (let index = 0; index < apiTipo.length; index++) {
             entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
                 substituicao = tipos[match];
-                let elemento = document.createElement('span');
+                let elemento = document.createElement('div');
                 elemento.textContent = substituicao;
                 corBack = cores[substituicao.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][0];
                 elemento.style.backgroundColor = corBack;
