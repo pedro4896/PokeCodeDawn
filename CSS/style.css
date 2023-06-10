@@ -168,7 +168,7 @@ header{
     border-radius: 10px;
     word-break: break-all;
     font-size: 0.8em;
-    padding: 5px;
+    padding: 0px 7px 5px 5px;
 }
 
 #visualizarPokemon #caracteristicas{
