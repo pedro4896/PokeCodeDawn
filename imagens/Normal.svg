@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176.49 176.38">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f3b81a;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #b56428;
+      }
+
+      .cls-3 {
+        fill: #f48b20;
+      }
+
+      .cls-4 {
+        fill: #915022;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path class="cls-1" d="M88.19,0c48.71,0,88.3,39.48,88.3,88.19s-39.59,88.19-88.3,88.19S0,136.9,0,88.19,39.48,0,88.19,0h0Z"/>
+      <path class="cls-3" d="M88.19,0c48.71,0,88.3,39.48,88.3,88.19s-39.59,88.19-88.3,88.19V0Z"/>
+      <path class="cls-2" d="M88.19,26.02c25.13,0,45.49,39.92,45.49,74.18,0,66.84-90.97,66.84-90.97,0,0-34.25,20.35-74.18,45.49-74.18h0Z"/>
+      <path class="cls-4" d="M88.19,26.02c25.13,0,45.49,39.92,45.49,74.18s-22.69,50.16-45.49,50.16V26.02Z"/>
+    </g>
+  </g>
+</svg>

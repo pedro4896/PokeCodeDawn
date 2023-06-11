@@ -191,8 +191,6 @@ function exibePokemon() {
                     numeroPokemon = matches[1];
                 }
                 item.setAttribute('data-Pokemon', numeroPokemon);
-                
-                
 
                 // Criando o elemento img
                 nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
@@ -214,12 +212,31 @@ function exibePokemon() {
                 pokemon.setAttribute('data-posicao', index);
                 pokemon.setAttribute('data-cor', corBack);
 
-                order = document.createElement('span');
+                order = document.createElement('div');
                 order.setAttribute('id','ordem');
-                order.textContent = '#'+ index;
                 order.setAttribute('data-Pokemon', numeroPokemon);
                 order.setAttribute('data-posicao', index);
                 order.setAttribute('data-cor', corBack);
+                apiTipo = data.types;
+                for (let index = 0; index < apiTipo.length; index++) {
+                    entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
+                        substituicao = tipos[match];
+                        let elemento = document.createElement('div');
+                        elemento.setAttribute('title', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
+                        elemento.setAttribute('alt', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
+                        elemento.classList.add('elementos');
+                        elemento.style.background = 'url(./imagens/' + (substituicao.charAt(0).toUpperCase() + substituicao.slice(1)).normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "") + '.svg)';
+                        elemento.style.backgroundSize = 'contain';
+                        elemento.style.backgroundRepeat = 'no-repeat';
+                        elemento.style.backgroundPosition = 'center';
+                        order.appendChild(elemento);
+                    });    
+                }
+
+                let elemento = document.createElement('div');
+                elemento.textContent = '#'+ index;
+                elemento.classList.add('elementos');
+                order.appendChild(elemento);
 
                 // Adicionando a image e o título à div
                 item.appendChild(img);
@@ -248,6 +265,8 @@ function numeroAleatorio(){
 }
 
 function visualizarPokemon(event){
+    window.scrollTo(0, 0);
+
     pokedex.style.padding = '0px';
     const itens = document.querySelectorAll('.item');
     itens.forEach(element => {
@@ -273,26 +292,41 @@ function visualizarPokemon(event){
             src = './imagens/interrogacao.png';
         }
 
-        const order = document.querySelector('#visualizarPokemon #ordem');
-        order.textContent = '#'+ posicaoPokemon;
+        const ordem = document.querySelector('#visualizarPokemon #order');
+        ordem.textContent = '#'+ posicaoPokemon;
 
         const img = document.querySelector('#visualizarPokemon #pokemon')
-        img.setAttribute('src', src); img.setAttribute('title', nome); img.setAttribute('alt', nome);
+        console.log('url(' + src + ')');
+        img.style.background = 'url(' + src + ')';
+        img.style.backgroundPosition = 'center';
+        img.style.backgroundRepeat = 'no-repeat';
+        img.style.backgroundSize = 'contain';
+        img.setAttribute('title', nome); 
+        img.setAttribute('alt', nome);
 
         const nomenclatura = document.querySelector('#visualizarPokemon #nome')
         nomenclatura.textContent = nome;
 
-        // retorna o primeiro tipo de natureza do pokemon
         const apiTipo = data.types;
         const natureza = document.getElementById('natureza');
         for (let index = 0; index < apiTipo.length; index++) {
             entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
                 substituicao = tipos[match];
+                let container = document.createElement('div');
+                container.classList.add('tipo');
                 let elemento = document.createElement('div');
-                elemento.textContent = substituicao;
-                corBack = cores[substituicao.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][0];
-                elemento.style.backgroundColor = corBack;
-                natureza.appendChild(elemento);
+                elemento.setAttribute('title', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
+                elemento.setAttribute('alt', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
+                elemento.classList.add('elementos');
+                elemento.style.background = 'url(./imagens/' + (substituicao.charAt(0).toUpperCase() + substituicao.slice(1)).normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "") + '.svg)';
+                elemento.style.backgroundSize = 'contain';
+                elemento.style.backgroundRepeat = 'no-repeat';
+                elemento.style.backgroundPosition = 'center';
+                let elemento_nome = document.createElement('div');
+                elemento_nome.textContent = substituicao.charAt(0).toUpperCase() + substituicao.slice(1);
+                container.appendChild(elemento);
+                container.appendChild(elemento_nome);
+                natureza.appendChild(container);
             });    
         }
                 

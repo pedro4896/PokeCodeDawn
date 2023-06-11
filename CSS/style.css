@@ -69,7 +69,7 @@ header{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 30%;
+    height: 40%;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -100,12 +100,23 @@ header{
 }
 
 #ordem{
-    text-align: end;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     order: 1;
-    width: auto;
-    height: 20px;
-    margin-bottom: 5px;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
     padding-right: 5px;
+}
+
+#ordem .elementos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 60px;
 }
 
 #visualizarPokemon{
@@ -120,7 +131,7 @@ header{
     scrollbar-width: thin; /* para navegadores Firefox */
     scrollbar-color: transparent transparent; /* para navegadores Chrome, Safari, Edge */
 }
-#visualizarPokemon #ordem{
+#visualizarPokemon #order{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -128,13 +139,14 @@ header{
     order: 1;
     width: 100%;
     height: auto;
+    padding: 20px;
     margin-bottom: 10px;
-    padding-right: 10px;
 }
 
 #visualizarPokemon #pokemon{
     order: 2;
-    width: 90%;
+    width: 100%;
+    height: 40vh;
     padding: 10px;
     margin-bottom: 10px;
     filter: drop-shadow(5px 5px 5px #565353);
@@ -153,9 +165,23 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: baseline;
     order: 4;
     width: 100%;
     margin-bottom: 20px;
+}
+
+#visualizarPokemon #natureza .tipo{
+    display: flex;
+    flex-direction: column;
+    order: 4;
+    width: 80%;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+#visualizarPokemon #natureza .tipo div{
+    width: 100%;
 }
 
 #visualizarPokemon #natureza div{
