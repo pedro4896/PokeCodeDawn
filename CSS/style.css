@@ -191,10 +191,10 @@ header{
     align-items: center;
     width: 47%;
     height: 40px;
-    padding: 0px 7px 5px 5px;
     border-radius: 10px;
     word-break: break-all;
     font-size: 0.8em;
+    padding: 0px 5px;
 }
 
 #visualizarPokemon #caracteristicas{
