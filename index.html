@@ -22,12 +22,20 @@
   </head>
   <body>
     <header>
-      <i class="fa-solid fa-arrow-left seta fa-sm" onclick="voltar()"></i>
-      <div class="logo"><a href="www.google.com">PokeCodeDawn</a></div>
+      <i id="seta" class="fa-solid fa-arrow-left fa-sm" onclick="voltar()"></i>
+      <div id="logo"><a href="https://www.instagram.com/code_alvorecer/">PokeCodeDawn</a></div>
+      <div id="hamburguer" class="fa-solid fa-bars fa-sm" data-toggle="collapse" href="#collapseDiv" aria-controls="collapseDiv"></div>
+      <div class="collapse" id="collapseDiv">
+        <div id="pesquisa"> 
+          <div><input type="text" placeholder="Digite o nome do Pokémon" id="input" onkeyup="pesquisarPokemon()"></div>
+          <div><i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></div>
+        </div>
+      </div>
     </header>
 
     <div id="posicionamento">
-      <div id="pokedex" class="accordion">
+      <div id="pokedex">
+        <div id="nenhumPokemon">Nenhum Pokémon Encontrado</div>
         <div id="visualizarPokemon">
           <div id="order"></div>
           <div id="pokemon"></div>
