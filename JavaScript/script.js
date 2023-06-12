@@ -265,6 +265,9 @@ function numeroAleatorio(){
 }
 
 function visualizarPokemon(event){
+    const voltar = document.querySelector('header .seta');
+    voltar.style.display = 'flex';
+
     window.scrollTo(0, 0);
 
     pokedex.style.padding = '0px';
@@ -307,7 +310,7 @@ function visualizarPokemon(event){
         const nomenclatura = document.querySelector('#visualizarPokemon #nome')
         nomenclatura.textContent = nome;
 
-        const apiTipo = data.types;
+        let apiTipo = data.types;
         const natureza = document.getElementById('natureza');
         for (let index = 0; index < apiTipo.length; index++) {
             entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
@@ -389,6 +392,34 @@ function visualizarPokemon(event){
             });
         })
     })
+}
+
+function voltar(){
+    window.scrollTo(0, 0);
+
+    const voltar = document.querySelector('header .seta');
+    voltar.style.display = 'none';
+
+    const visualizarPokemon = document.getElementById('visualizarPokemon');
+    visualizarPokemon.style.display = 'none';
+
+    const descricao = document.querySelectorAll('#descricao ul li');
+    descricao.forEach(element => {
+        element.remove();
+    });
+
+    const natureza = document.querySelectorAll('#natureza .tipo');
+    natureza.forEach(element => {
+        element.remove();
+        
+    });
+    
+    pokedex.style.padding = '20px';
+
+    const itens = document.querySelectorAll('.item');
+    itens.forEach(element => {
+       element.style.display = 'flex';
+    });
 }
 
 totalPokemon();

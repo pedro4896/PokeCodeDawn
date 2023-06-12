@@ -11,6 +11,19 @@
     -webkit-text-stroke: 1px #000;
 }
 
+a{
+    color: #ffcc00;
+    font-size: 0.9em;
+}
+
+a:visited{
+    color: #ffcc00;
+}
+
+a:hover{
+    color: #ffcc00;
+}
+
 body{
     /*background: linear-gradient(to right, #a1042e,#790b29,#91062b);*/
     background-color: #000;
@@ -21,9 +34,9 @@ header{
     position: fixed;
     top: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     height: 70px;
     text-align: center;
@@ -33,6 +46,27 @@ header{
     z-index: 1;
     /*background: linear-gradient(to right, #a1042e,#790b29,#91062b);*/
     background-color: #000;
+    cursor: pointer;
+}
+
+header .seta{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 10%;
+    padding-left: 15px;
+}
+
+header .logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 0.9em;
 }
 
 #pokedex{
