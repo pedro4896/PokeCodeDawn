@@ -477,18 +477,31 @@ function voltar(){
 function filtrar() {
     const itensPokemon = document.querySelectorAll('.item');
     const input = document.getElementById('tipoElemento').value;
+    // Obtém a mensagem de erro ao encontrar o pokemon
+    const nenhumPokemon = document.getElementById('nenhumPokemon');
+
+    let encontrouResultado = false;
+
     itensPokemon.forEach(element => {
         const tipo = element.getAttribute('data-elemento');
         if(input === 'Todos'){
             element.style.display = 'flex';
+            encontrouResultado = true;
         }else{
             if(tipo.includes(input)){
                 element.style.display = 'flex';
+                encontrouResultado = true;
             }else{
                 element.style.display = 'none';
             }
         }
     });
+
+    if(encontrouResultado){
+        nenhumPokemon.style.display = 'none';
+    } else{
+        nenhumPokemon.style.display = 'block';
+    }
 }
 
 totalPokemon();
