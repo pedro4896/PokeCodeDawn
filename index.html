@@ -26,6 +26,36 @@
       <div id="logo"><a href="https://www.instagram.com/code_alvorecer/">PokeCodeDawn</a></div>
       <div id="hamburguer" class="fa-solid fa-bars fa-sm" data-toggle="collapse" href="#collapseDiv" aria-controls="collapseDiv"></div>
       <div class="collapse" id="collapseDiv">
+        <div id="filtro">
+          <div id="nomeFiltro"><i class="fa-solid fa-filter fa-sm"></i><span>Filtrar:</span></div>
+          <div id="opcoesFiltro">
+            <select name="elemento" id="tipoElemento" onchange="filtrar()">
+              <option value="Todos" selected>Todos</option>
+              <option value="Normal">Normal</option>
+              <option value="Lutador">Lutador</option>
+              <option value="Voador">Voador</option>
+              <option value="Venenoso">Venenoso</option>
+              <option value="Terrestre">Terrestre</option>
+              <option value="Pedra">Pedra</option>
+              <option value="Inseto">Inseto</option>
+              <option value="Fantasma">Fantasma</option>
+              <option value="Metálico">Metálico</option>
+              <option value="Fogo">Fogo</option>
+              <option value="Água">Água</option>
+              <option value="Elétrico">Elétrico</option>
+              <option value="Psíquico">Psíquico</option>
+              <option value="Gelo">Gelo</option>
+              <option value="Dragão">Dragão</option>
+              <option value="Noturno">Noturno</option>
+              <option value="Sombrio">Sombrio</option>
+              <option value="Fada">Fada</option>
+              <option value="Desconhecido">Desconhecido</option>
+            </select>
+          </div>
+        </div>
+
+        <hr>
+
         <div id="pesquisa"> 
           <div><input type="text" placeholder="Digite o nome do Pokémon" id="input" onkeyup="pesquisarPokemon()"></div>
           <div><i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></div>

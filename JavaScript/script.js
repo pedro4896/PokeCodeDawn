@@ -103,7 +103,7 @@ const tipos = {
     water: 'Água',
     grass: 'Grama',
     electric: 'Elétrico',
-    psychic: 'Psiquico',
+    psychic: 'Psíquico',
     ice: 'Gelo',
     dragon: 'Dragão',
     dark: 'Noturno',
@@ -218,6 +218,7 @@ function exibePokemon() {
                 order.setAttribute('data-posicao', index);
                 order.setAttribute('data-nome', nome);
 
+                let tipoElemento = '';
                 apiTipo = data.types;
                 for (let index = 0; index < apiTipo.length; index++) {
                     entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
@@ -225,6 +226,7 @@ function exibePokemon() {
                         let elemento = document.createElement('div');
                         elemento.setAttribute('title', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
                         elemento.setAttribute('alt', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
+                        tipoElemento += substituicao.charAt(0).toUpperCase() + substituicao.slice(1) + ',';
                         elemento.classList.add('elementos');
                         elemento.style.background = 'url(./imagens/' + (substituicao.charAt(0).toUpperCase() + substituicao.slice(1)).normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "") + '.svg)';
                         elemento.style.backgroundSize = 'contain';
@@ -238,6 +240,11 @@ function exibePokemon() {
                 elemento.textContent = '#'+ index;
                 elemento.classList.add('elementos');
                 order.appendChild(elemento);
+
+                item.setAttribute('data-elemento', tipoElemento);
+                img.setAttribute('data-elemento', tipoElemento);
+                pokemon.setAttribute('data-elemento', tipoElemento);
+                order.setAttribute('data-elemento', tipoElemento);
 
                 // Adicionando a image e o título à div
                 item.appendChild(img);
@@ -255,6 +262,7 @@ function exibePokemon() {
 
                 // Adiciona evento de click aos cards de pokemon
                 item.onclick = visualizarPokemon;
+                filtrar();
             })
         },500);  
     }
@@ -415,7 +423,6 @@ function pesquisarPokemon() {
     }else{
         // Obtém o valor digitado pelo usuário
         const nomePokemon = inputNomePokemon.value.trim().toLowerCase();
-        console.log("🚀 ~ file: script.js:405 ~ pesquisarPokemon ~ nomePokemon:", nomePokemon)
 
         // Itera sobre os itens e exibe apenas aqueles que correspondem ao nome pesquisado 
         for (let i = 0; i < itensPokemon.length; i++) {
@@ -464,6 +471,23 @@ function voltar(){
     const itens = document.querySelectorAll('.item');
     itens.forEach(element => {
        element.style.display = 'flex';
+    });
+}
+
+function filtrar() {
+    const itensPokemon = document.querySelectorAll('.item');
+    const input = document.getElementById('tipoElemento').value;
+    itensPokemon.forEach(element => {
+        const tipo = element.getAttribute('data-elemento');
+        if(input === 'Todos'){
+            element.style.display = 'flex';
+        }else{
+            if(tipo.includes(input)){
+                element.style.display = 'flex';
+            }else{
+                element.style.display = 'none';
+            }
+        }
     });
 }
 
