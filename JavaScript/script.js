@@ -254,11 +254,8 @@ function exibePokemon() {
                 // Adicionando o item a pokedex
                 pokedex.appendChild(item);
 
-                // Adicionando a pokedex ao posicionamento
-                posicionamento.appendChild(pokedex);
-
-                // Adicionando o posicionamento ao corpo do documento
-                document.body.appendChild(posicionamento);
+                // Adicionando o pokedex ao corpo do documento
+                document.body.appendChild(pokedex);
 
                 // Adiciona evento de click aos cards de pokemon
                 item.onclick = visualizarPokemon;
