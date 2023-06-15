@@ -271,6 +271,11 @@ function numeroAleatorio(){
 }
 
 function visualizarPokemon(event){
+    if (window.innerWidth <= 575.98) {
+        document.getElementById('conteudoCollapse').style.display = 'none';
+        collapsar = false;
+    }
+    
     window.scrollTo(0, 0);
     const voltar = document.querySelector('header #seta');
     voltar.style.display = 'flex';
@@ -401,6 +406,8 @@ function visualizarPokemon(event){
 
 //Função de pesquisa do Pokémon
 function pesquisarPokemon() {
+    document.getElementById('tipoElemento').value = 'Todos';
+
     // Captura o campo de entrada e o botão de pesquisa
     const inputNomePokemon = document.getElementById('input');
    
@@ -469,6 +476,8 @@ function voltar(){
     itens.forEach(element => {
        element.style.display = 'flex';
     });
+
+    filtrar();
 }
 
 function filtrar() {
@@ -498,6 +507,18 @@ function filtrar() {
         nenhumPokemon.style.display = 'none';
     } else{
         nenhumPokemon.style.display = 'block';
+    }
+}
+
+var collapsar = false;
+function apresentaConteudo(){
+    const collapse = document.getElementById('conteudoCollapse');
+    if(collapsar == true){
+        collapse.style.display = 'none';
+        collapsar = false;
+    }else{
+        collapse.style.display = 'flex';
+        collapsar = true;
     }
 }
 
