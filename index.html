@@ -23,9 +23,8 @@
   <body>
     <div class="container">
       <div class="row"> <!-- Header -->
-        <header>
+        <header >
           <nav>
-            <div id="seta" class="fa-solid fa-arrow-left fa-xl" onclick="voltar()"></div>
             <a href="https://www.instagram.com/code_alvorecer/" id="logo">PokeCodeDawn</a>
             <div id="hamburguer" class="fa-solid fa-bars fa-xl" onclick="apresentaConteudo()"></div>
           </nav>
@@ -35,7 +34,7 @@
                 <input type="text" id="input" placeholder="Pesquisar..." onkeyup="pesquisarPokemon()">
                 <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-lg"></i>
             </div>
-
+  
             <div id="filtro">
               <div id="nomeFiltro">
                 <div><i class="fa-solid fa-filter fa-sm"></i></div>
@@ -71,74 +70,81 @@
         </header>
       </div> <!-- /Header -->
 
-      <div class="row"> <!-- Pokedex -->
-        <div id="pokedex" class="col-12">
-          <div id="nenhumPokemon">Nenhum Pokémon Encontrado</div>
-          <div id="visualizarPokemon">
-            <div id="order"></div>
-            <div id="pokemon"></div>
-            <span id="nome"></span>
-        
-            <div id="natureza">
-              <div>Tipo:</div>
-            </div>
-    
-            <div id="caracteristicas">
-              <div id="peso">
-                <span id="valorPeso"></span>
-                <span id="nomePeso">Peso</span>
-              </div>
-              <div id="altura">
-                <span id="valorAltura"></span>
-                <span id="nomeAltura">Altura</span>
-              </div>
-            </div>
-        
-            <div id="status">
-              <h5 class="titulo">Estado Básico</h5>
-    
-              <div id="container">
-                <div id="nomeStatus">
-                  <div>HP:</div>
-                  <div>ATK:</div>
-                  <div>DEF:</div>
-                  <div>SPD:</div>
-                  <div>EXP:</div>
-                </div>
-      
-                <div id="valorStatus">
-                  <div class="progress">
-                    <div id="hp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                  </div>
-                  <div class="progress">
-                    <div id="ataque" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                  </div>
-                  <div class="progress">
-                    <div id="defesa" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                  </div>
-                  <div class="progress">
-                    <div id="velocidade" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                  </div>
-                  <div class="progress">
-                    <div id="exp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                  </div>
-                </div>
-              </div>
-            </div>  
-                    
-            <details id="descricao">
-              <summary>Descrição</summary>
-              <ul></ul>
-            </details>
-          </div>
-        </div>
-      </div> <!-- /Pokedex -->
-
       <div class="row">
-        <footer>
-          <a href="https://www.instagram.com/code_alvorecer/">code_alvorecer</a>
-        </footer>
+        <div id="pokedex" class="col-xl-7">
+          <div id="nenhumPokemon">Nenhum Pokémon Encontrado</div>
+        </div>
+
+        <div id="desconhecido" class="col-xl-5"></div>
+
+        <div id="visualizarPokemon" class="col-xl-5">
+          <div id="order">
+            <div id="seta" class="fa-solid fa-arrow-left fa-xl" onclick="voltar()"></div>
+            <div id="numeracao"></div>
+          </div>
+          <div id="pokemon"></div>
+          <span id="nome"></span>
+      
+          <div id="natureza">
+            <div>Tipo:</div>
+          </div>
+  
+          <div id="caracteristicas">
+            <div id="peso">
+              <span id="valorPeso"></span>
+              <span id="nomePeso">Peso</span>
+            </div>
+            <div id="altura">
+              <span id="valorAltura"></span>
+              <span id="nomeAltura">Altura</span>
+            </div>
+          </div>
+      
+          <div id="status">
+            <h5 class="titulo">Estado Básico</h5>
+  
+            <div id="container">
+              <div id="nomeStatus">
+                <div>HP:</div>
+                <div>ATK:</div>
+                <div>DEF:</div>
+                <div>SPD:</div>
+                <div>EXP:</div>
+              </div>
+    
+              <div id="valorStatus">
+                <div class="progress">
+                  <div id="hp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                </div>
+                <div class="progress">
+                  <div id="ataque" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                </div>
+                <div class="progress">
+                  <div id="defesa" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                </div>
+                <div class="progress">
+                  <div id="velocidade" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                </div>
+                <div class="progress">
+                  <div id="exp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                </div>
+              </div>
+            </div>
+          </div>  
+                  
+          <details id="descricao">
+            <summary>Descrição</summary>
+            <ul></ul>
+          </details>
+        </div>
       </div>
+
+      <!--<div class="row fixed-bottom">
+        <footer>
+          <div><img src="./imagens/code_alvorecer.png" alt="code_alvorecer" title="code_alvorecer"></div>
+          <div><a href="https://www.instagram.com/code_alvorecer/">code_alvorecer</a></div>
+        </footer>
+      </div>-->
     </div> 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

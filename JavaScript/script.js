@@ -254,9 +254,6 @@ function exibePokemon() {
                 // Adicionando o item a pokedex
                 pokedex.appendChild(item);
 
-                // Adicionando o pokedex ao corpo do documento
-                document.body.appendChild(pokedex);
-
                 // Adiciona evento de click aos cards de pokemon
                 item.onclick = visualizarPokemon;
                 filtrar();
@@ -271,21 +268,29 @@ function numeroAleatorio(){
 }
 
 function visualizarPokemon(event){
+    const desconhecido = document.getElementById('desconhecido');
+    desconhecido.style.display = 'none';
+    atualizaElementos();
+
     if (window.innerWidth <= 575.98) {
         document.getElementById('conteudoCollapse').style.display = 'none';
         collapsar = false;
     }
+
+    if (window.innerWidth <= 991.98){
+        pokedex.style.display = 'none';
+        pokedex.style.padding = '0px';
+
+        const voltar = document.querySelector('#seta');
+        voltar.style.display = 'flex';
+
+        const itens = document.querySelectorAll('.item');
+        itens.forEach(element => {
+           element.style.display = 'none';
+        });
+    }
     
     window.scrollTo(0, 0);
-    const voltar = document.querySelector('header #seta');
-    voltar.style.display = 'flex';
-
-    pokedex.style.padding = '0px';
-    const itens = document.querySelectorAll('.item');
-    itens.forEach(element => {
-       element.style.display = 'none';
-    });
-
     const visualizarPokemon = document.getElementById('visualizarPokemon');
     visualizarPokemon.style.display = 'flex';
     const numeroPokemon = event.target.getAttribute('data-Pokemon');
@@ -305,7 +310,7 @@ function visualizarPokemon(event){
             src = './imagens/interrogacao.png';
         }
 
-        const ordem = document.querySelector('#visualizarPokemon #order');
+        const ordem = document.querySelector('#visualizarPokemon #order #numeracao');
         ordem.textContent = '#'+ posicaoPokemon;
 
         const img = document.querySelector('#visualizarPokemon #pokemon')
@@ -453,12 +458,29 @@ function pesquisarPokemon() {
 function voltar(){
     window.scrollTo(0, 0);
 
-    const voltar = document.querySelector('header #seta');
+    if (window.innerWidth <= 991.98) {
+        pokedex.style.display = 'flex';
+    }
+
+    const voltar = document.querySelector('#seta');
     voltar.style.display = 'none';
 
     const visualizarPokemon = document.getElementById('visualizarPokemon');
     visualizarPokemon.style.display = 'none';
 
+    atualizaElementos();
+    
+    pokedex.style.padding = '20px';
+
+    const itens = document.querySelectorAll('.item');
+    itens.forEach(element => {
+       element.style.display = 'flex';
+    });
+
+    filtrar();
+}
+
+function atualizaElementos(){
     const descricao = document.querySelectorAll('#descricao ul li');
     descricao.forEach(element => {
         element.remove();
@@ -469,15 +491,6 @@ function voltar(){
         element.remove();
         
     });
-    
-    pokedex.style.padding = '20px';
-
-    const itens = document.querySelectorAll('.item');
-    itens.forEach(element => {
-       element.style.display = 'flex';
-    });
-
-    filtrar();
 }
 
 function filtrar() {
