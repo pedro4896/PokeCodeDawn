@@ -158,7 +158,7 @@ function exibePokemon() {
     let pokemon; // Elemento HTML para o nome do Pokémon
     let order; // Elemento HTMl para a ordem do Pokémon
 
-    for (let index = 1; index < 22; index++){
+    for (let index = 1; index < total; index++){
         setTimeout(function () {
             // Verifica se o índice é maior ou igual a 1010
             if(index >= 1010){
