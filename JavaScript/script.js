@@ -1,11 +1,11 @@
-var total;
-var contador = 10000;
-var numeracao;
-var src;
-var dados;
-const posicionamento = document.getElementById('posicionamento');
-const pokedex = document.getElementById('pokedex');
+var total; // Variável para armazenar o total
+var contador = 10000; // Variável de contador com valor incial de 10000
+var numeracao; // Variável para armazenar a numeração
+var src; // Variável para armazenar o src
+var dados; // Variável para armazenar os dados
+const pokedex = document.getElementById('pokedex'); // Constante que representa o elemento com id 'pokedex'
 
+// Cores dos tipos de Pokémon
 const cores = {
     Normal:[
         '#704F30', //(Marrom-escuro)
@@ -89,6 +89,7 @@ const cores = {
     ]
 };
 
+// Mapeamento dos tipos de Pokémon em inglês para seus equivalentes em português
 const tipos = {
     normal: 'Normal',
     fighting: 'Lutador',
@@ -112,20 +113,26 @@ const tipos = {
     unknown: 'Desconhecido',
 }
 
+/*
+    * Função assíncrona para requisitar dados de uma URL.
+    * @param{string} url - A URL para a qual a requisição será feita.
+    * @returns {Promise} - Um Promise que será resolvida com os dados da resposta.
+*/
 async function requisitarDados(url) {
     try {
-        const response = await fetch(url);
+        const response = await fetch(url); // Faz a requisição à URL fornecida.
         if (!response.ok) {
-            throw new Error('Erro ao fazer a requisição ' + response.status);
+            throw new Error('Erro ao fazer a requisição ' + response.status); // Lança um erro caso a resposta não seja OK
         }
-        const data = await response.json();
-        return data;
+        const data = await response.json(); // Extrai os dados da resposta como JSON
+        return data; // Retorna os dados
     } catch (error) {
         // Trate o erro, se houver
-        console.log(error);
+        console.log(error); // Registra o erro no console
     }  
 }
 
+// Função para obter o total de Pokémons disponíveis na API.
 function totalPokemon() {
     let url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
     requisitarDados(url)
@@ -136,13 +143,24 @@ function totalPokemon() {
     })
 }
 
+// Função para exibir a lista de pokémons
 function exibePokemon() {
-    let url; let apiTipo; let entradaTipo;
-    let substituicao; let corBack; let item;
-    let posicao; let numeroPokemon; let nome;
-    let img; let pokemon; let order;
+    let url; // URL da API para obter os dados do Pokémon
+    let apiTipo; // Tipo do Pokémon na API
+    let entradaTipo; // Tipo do Pokémon em português
+    let substituicao;  // Variável temporária para substituição de tipos
+    let corBack; // Cor de fundo do Pokémon
+    let item; // Elemento HTML para representar o Pokémon
+    let posicao; // Localização do Pokémon
+    let numeroPokemon;  // Número do Pokémon
+    let nome; // Nome do Pokémon
+    let img; // Elemento HTML para a imagem do Pokémon
+    let pokemon; // Elemento HTML para o nome do Pokémon
+    let order; // Elemento HTMl para a ordem do Pokémon
+
     for (let index = 1; index < 22; index++){
         setTimeout(function () {
+            // Verifica se o índice é maior ou igual a 1010
             if(index >= 1010){
                 contador++;   
                 numeracao = contador;   
@@ -154,8 +172,10 @@ function exibePokemon() {
             url = 'https://pokeapi.co/api/v2/pokemon/'+numeracao+'/';
             requisitarDados(url)
             .then(data => {
+                // Obtém o nome do Pokémon e capitaliza a primeira letra
                 nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-                // retorna o primeiro tipo de natureza do pokemon
+
+                // retorna o primeiro tipo de natureza do Pokémon
                 apiTipo = data.types[0].type.name;
 
                 // retorna o nome do tipo em português
@@ -164,9 +184,10 @@ function exibePokemon() {
                     return substituicao;
                 });
                 
-                // retorna uma das 2 cores referênte ao tipo de pokemon
+                // retorna uma das duas cores referentes ao tipo de Pokémon
                 corBack = cores[entradaTipo.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][numeroAleatorio()];
 
+                // Verifica se existem imagens disponíveis para o Pokémon
                 if (data.sprites.other.dream_world.front_default != undefined){
                     src = data.sprites.other.dream_world.front_default;  
                 }else if(data.sprites.other['official-artwork'].front_default != undefined){
@@ -175,6 +196,7 @@ function exibePokemon() {
                     src = './imagens/interrogacao.png';
                 }
  
+                // Cria um elementos div para representar o Pokémon
                 item = document.createElement('div');
                 item.classList.add('item');
                 item.style.order = index;
@@ -193,7 +215,7 @@ function exibePokemon() {
                 }
                 item.setAttribute('data-Pokemon', numeroPokemon);
 
-                // Criando o elemento img
+                // Criando o elemento img para a imagem do Pokémon
                 img = document.createElement('img');
                 img.setAttribute('id','pokemon');
                 img.setAttribute('src', src);
@@ -203,7 +225,7 @@ function exibePokemon() {
                 img.setAttribute('data-posicao', index);
                 img.setAttribute('data-nome', nome);
                 
-                //Criando o elemento h5
+                //Criando o elemento span para o nome do Pokémon
                 pokemon = document.createElement('span');
                 pokemon.setAttribute('id','name');
                 pokemon.style.order = 3;
@@ -212,41 +234,51 @@ function exibePokemon() {
                 pokemon.setAttribute('data-posicao', index);
                 pokemon.setAttribute('data-nome', nome);
 
+                // Cria um elemento div para a ordem do Pokémon
                 order = document.createElement('div');
                 order.setAttribute('id','ordem');
                 order.setAttribute('data-Pokemon', numeroPokemon);
                 order.setAttribute('data-posicao', index);
                 order.setAttribute('data-nome', nome);
 
-                let tipoElemento = '';
+                let tipoElemento = ''; // Variável para armazenar os tipos do Pokémon em português
                 apiTipo = data.types;
                 for (let index = 0; index < apiTipo.length; index++) {
+                    // retorna o nome do tipo do Pokémon em português
                     entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
                         substituicao = tipos[match];
+                        
+                        // Cria um elemento div para representar o tipo do Pokémon
                         let elemento = document.createElement('div');
                         elemento.setAttribute('title', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
                         elemento.setAttribute('alt', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
                         tipoElemento += substituicao.charAt(0).toUpperCase() + substituicao.slice(1) + ',';
                         elemento.classList.add('elementos');
+
+                        // Define a imagem de fundo do elemento div com base no tipo do Pokémon
                         elemento.style.background = 'url(./imagens/' + (substituicao.charAt(0).toUpperCase() + substituicao.slice(1)).normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "") + '.svg)';
                         elemento.style.backgroundSize = 'contain';
                         elemento.style.backgroundRepeat = 'no-repeat';
                         elemento.style.backgroundPosition = 'center';
+
+                        // Adiciona o elemento div ao elemento order
                         order.appendChild(elemento);
                     });    
                 }
 
+                // Cria um elemento div para representar o número do pokémon
                 let elemento = document.createElement('div');
                 elemento.textContent = '#'+ index;
                 elemento.classList.add('elementos');
                 order.appendChild(elemento);
 
+                // Define o atributo 'data-elemento' com os tipos do Pokémon nos elementos relevantes
                 item.setAttribute('data-elemento', tipoElemento);
                 img.setAttribute('data-elemento', tipoElemento);
                 pokemon.setAttribute('data-elemento', tipoElemento);
                 order.setAttribute('data-elemento', tipoElemento);
 
-                // Adicionando a image e o título à div
+                // Adicionando a imagem, o nome e a ordem do Pokémon ao item
                 item.appendChild(img);
                 item.appendChild(pokemon);
                 item.appendChild(order);
@@ -254,54 +286,72 @@ function exibePokemon() {
                 // Adicionando o item a pokedex
                 pokedex.appendChild(item);
 
-                // Adiciona evento de click aos cards de pokemon
+                // Adiciona evento de clicque aos cards de Pokémon
                 item.onclick = visualizarPokemon;
+
+                // Chama a função "filtrar"
                 filtrar();
             })
         },500);  
     }
 }
 
+// Função que retorna um número aleatório entre 0 e 1
 function numeroAleatorio(){
     let random = Math.floor(Math.random() * 2); // Gera um número Aleatório de 0 a 1
     return random;
 }
 
+// Função para visualizar as informações do Pokémon
 function visualizarPokemon(event){
+    // Obtém o elemento 'desconhecido' e o oculta-o
     const desconhecido = document.getElementById('desconhecido');
     desconhecido.style.display = 'none';
-    atualizaElementos();
+    atualizaElementos(); // Chama a função 'atualizaElementos()'
 
+    // Verifica o tamanho da janela e realiza ações com base nisso
     if (window.innerWidth <= 575.98) {
         document.getElementById('conteudoCollapse').style.display = 'none';
         collapsar = false;
     }
 
     if (window.innerWidth <= 991.98){
+        // Oculta o elemento 'pokedex' e ajsuta o padding
         pokedex.style.display = 'none';
         pokedex.style.padding = '0px';
 
+        // Exibe o elemento 'voltar'
         const voltar = document.querySelector('#seta');
         voltar.style.display = 'flex';
 
+        // Oculta todos os elementos com a classe 'item'
         const itens = document.querySelectorAll('.item');
         itens.forEach(element => {
            element.style.display = 'none';
         });
     }
     
+    // Faz o scroll para o topo da página
     window.scrollTo(0, 0);
+
+    // Exibe o elemento 'visualizarPokemon'
     const visualizarPokemon = document.getElementById('visualizarPokemon');
     visualizarPokemon.style.display = 'flex';
+
+    // Obtém o número e a posição do Pokémon clicado
     const numeroPokemon = event.target.getAttribute('data-Pokemon');
     const posicaoPokemon = event.target.getAttribute('data-posicao');
+
+    // Monta a URL da API do Pokémon
     let url = 'https://pokeapi.co/api/v2/pokemon/'+numeroPokemon+'/';
 
+    // Faz  uma requisição para obter os dados do Pokémon
     requisitarDados(url)
     .then(data => {
         console.log(data);
         nome = data.name.charAt(0).toUpperCase() + data.name.slice(1);
 
+        // Verifica se existem sprites disponíveis e define a source (src) da imagem do Pokémon
         if (data.sprites.other.dream_world.front_default != undefined){
             src = data.sprites.other.dream_world.front_default;  
         }else if(data.sprites.other['official-artwork'].front_default != undefined){
@@ -310,9 +360,11 @@ function visualizarPokemon(event){
             src = './imagens/interrogacao.png';
         }
 
+        // Atualiza o número do Pokémon na visualização
         const ordem = document.querySelector('#visualizarPokemon #order #numeracao');
         ordem.textContent = '#'+ posicaoPokemon;
 
+        // Atualiza a imagem do Pokémon na visualização
         const img = document.querySelector('#visualizarPokemon #pokemon')
         console.log('url(' + src + ')');
         img.style.background = 'url(' + src + ')';
@@ -322,16 +374,21 @@ function visualizarPokemon(event){
         img.setAttribute('title', nome); 
         img.setAttribute('alt', nome);
 
+        // Atualiza o nome do Pokémon na visualização
         const nomenclatura = document.querySelector('#visualizarPokemon #nome')
         nomenclatura.textContent = nome;
 
+        // Cria elementos HTML para exibir os tipos
         let apiTipo = data.types;
         const natureza = document.getElementById('natureza');
         for (let index = 0; index < apiTipo.length; index++) {
             entradaTipo = apiTipo[index].type.name.replace(/(normal|fighting|flying|poison|ground|rock|bug|ghost|steel|fire|water|grass|electric|psychic|ice|dragon|dark|fairy|unknown|shadow)/gi, function(match) {
                 substituicao = tipos[match];
+                // Cria um elemento div para exibir o ícone do tipo
                 let container = document.createElement('div');
                 container.classList.add('tipo');
+
+                // cria um elemento duv para exibir o ícone do tipo
                 let elemento = document.createElement('div');
                 elemento.setAttribute('title', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
                 elemento.setAttribute('alt', substituicao.charAt(0).toUpperCase() + substituicao.slice(1));
@@ -340,20 +397,29 @@ function visualizarPokemon(event){
                 elemento.style.backgroundSize = 'contain';
                 elemento.style.backgroundRepeat = 'no-repeat';
                 elemento.style.backgroundPosition = 'center';
+
+                // Cria um elemento div para exibir o nome do tipo
                 let elemento_nome = document.createElement('div');
                 elemento_nome.textContent = substituicao.charAt(0).toUpperCase() + substituicao.slice(1);
+
+                // Adiciona o ícone e o nome do tipo ao container div
                 container.appendChild(elemento);
                 container.appendChild(elemento_nome);
+
+                // Adiciona o container div ao elemento "natureza"
                 natureza.appendChild(container);
             });    
         }
-                
+               
+        // Atualiza o peso do Pokémon na visualização
         const valorPeso = document.querySelector('#visualizarPokemon #caracteristicas #peso #valorPeso');
         valorPeso.textContent = (data.weight * 0.1).toFixed(1) + " kg";
 
+        // Atualiza a altura do Pokémon na visualização
         const valorAltura = document.querySelector('#visualizarPokemon #caracteristicas #altura #valorAltura');;
         valorAltura.textContent = (data.height * 0.1).toFixed(1) + " m";
 
+        // Atualiza os valores de status do Pokémon na visualização
         const hp = document.querySelector('#visualizarPokemon #status #container #valorStatus #hp');
         hp.textContent = data.stats[0].base_stat + '/300';
         hp.style.width = ((data.stats[0].base_stat / 300) * 100) + '%';
@@ -378,17 +444,21 @@ function visualizarPokemon(event){
         exp.textContent = data.base_experience + '/1000';
         exp.style.width = ((data.base_experience / 1000) * 100) + '%';
         exp.style.backgroundColor = '#F8D030';
-
+        
         const ul = document.querySelector('#descricao ul');
         url = 'https://pokeapi.co/api/v2/pokemon-species/' + nome.toLowerCase();
+        
+         // Faz uma requisição para obter os dados de descrição do Pokémon
         requisitarDados(url)
         .then(data => {
             let desc = data.flavor_text_entries;
+
+            // Itera sobre as descrições e as adiciona à lista de descrição
             desc.forEach(element => {
                 if(element && element.language.name == 'en'){
                     const texto = element.flavor_text;
 
-                    // Verificando se o texto já existe em algum elemento <li>
+                    // Verifica se o texto já existe em algum elemento <li>
                     let duplicado = false;
                     const lista = ul.querySelectorAll('li');
                     lista.forEach(el => {
@@ -398,6 +468,7 @@ function visualizarPokemon(event){
                         }
                     });
 
+                    // Adiciona o texto à lista de descrição
                     if(!duplicado){
                         li = document.createElement('li');
                         li.textContent = texto;
@@ -455,37 +526,51 @@ function pesquisarPokemon() {
     }
 }
 
+// Função para voltar a área de lista dos Pokémons
 function voltar(){
+    // Desloca a janela para o topo da página
     window.scrollTo(0, 0);
 
+    // Verifica se a largura da janela está abaixo ou igaul a 991.98 pixelx, indiciando que é um dispositivo de tela pequena
     if (window.innerWidth <= 991.98) {
+        // Exibe novamente a Pokédex
         pokedex.style.display = 'flex';
     }
 
+    // Oculta o boão de voltar
     const voltar = document.querySelector('#seta');
     voltar.style.display = 'none';
 
+    // Oculta a seção de visualização do Pokémon
     const visualizarPokemon = document.getElementById('visualizarPokemon');
     visualizarPokemon.style.display = 'none';
 
+    // Chama uma funçao para atualizar os elementos da Pokédex
     atualizaElementos();
     
+    // Define um espaçamento interno de 20 pixels para a Pokédex
     pokedex.style.padding = '20px';
 
+    // Captura todos os elementos com a classe 'item' dentro da Pokédex
     const itens = document.querySelectorAll('.item');
+    // Exibe todos os itens da Pokédex que estavam ocultos
     itens.forEach(element => {
        element.style.display = 'flex';
     });
 
+    // Chama a uma função para filtrar os Pokémons com base nos critérios selecionados
     filtrar();
 }
 
+// Função para atualizar os elementos
 function atualizaElementos(){
+    // remove todos os elementos da lista de descrição
     const descricao = document.querySelectorAll('#descricao ul li');
     descricao.forEach(element => {
         element.remove();
     });
 
+    // Remove todos os elementos de natureza
     const natureza = document.querySelectorAll('#natureza .tipo');
     natureza.forEach(element => {
         element.remove();
@@ -493,45 +578,57 @@ function atualizaElementos(){
     });
 }
 
+// Função para filtrar a lista de visualização
 function filtrar() {
+    // Obtém todos os itens de Pokémon
     const itensPokemon = document.querySelectorAll('.item');
+
+    // obtém o valor selecionado no campo de filtro
     const input = document.getElementById('tipoElemento').value;
+
     // Obtém a mensagem de erro ao encontrar o pokemon
     const nenhumPokemon = document.getElementById('nenhumPokemon');
 
     let encontrouResultado = false;
 
+    // Itera sobre os itens de Pokémon e exibe apenas aqueles que correspondem ao filtro selecionado
     itensPokemon.forEach(element => {
         const tipo = element.getAttribute('data-elemento');
+
         if(input === 'Todos'){
-            element.style.display = 'flex';
+            element.style.display = 'flex'; // Exibe o item 
             encontrouResultado = true;
         }else{
             if(tipo.includes(input)){
-                element.style.display = 'flex';
+                element.style.display = 'flex'; // Exibe  item
                 encontrouResultado = true;
             }else{
-                element.style.display = 'none';
+                element.style.display = 'none'; // Esconde o item
             }
         }
     });
 
+    // Exibe ou oculta a mensa de erro se nenhum resultado for encontrado
     if(encontrouResultado){
-        nenhumPokemon.style.display = 'none';
+        nenhumPokemon.style.display = 'none'; // Oculta a mensgem de erro
     } else{
-        nenhumPokemon.style.display = 'block';
+        nenhumPokemon.style.display = 'block'; // Exibe a mensagem de erro
     }
 }
 
+// Função para esconder ou exibir os conteudo do botão hamburguer
 var collapsar = false;
 function apresentaConteudo(){
+    // Obtém o elemento de colapso
     const collapse = document.getElementById('conteudoCollapse');
+    
+    // Verifica se o estado de colapso é verdadeiro
     if(collapsar == true){
-        collapse.style.display = 'none';
-        collapsar = false;
+        collapse.style.display = 'none'; // Oculta o conteúdo
+        collapsar = false; // Define o estado de colapso como falso
     }else{
-        collapse.style.display = 'flex';
-        collapsar = true;
+        collapse.style.display = 'flex'; // Exibe o conteúdo
+        collapsar = true; // Define o estado de colapso como verdadeiro
     }
 }
 

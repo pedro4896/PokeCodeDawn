@@ -14,36 +14,37 @@
     <![endif]-->
 
     <!-- CSS Externo -->
-    <link rel="stylesheet" href="./CSS/style.css">
-    <link rel="stylesheet" href="./CSS/normalize.css">
+    <link rel="stylesheet" href="./CSS/style.css"> <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./CSS/normalize.css"> <!-- Estilos de normalização -->
 
-    <link rel="shortcut icon" href="./imagens/pokebola.png" type="image/x-icon">
-    <title>Pokedex</title>
+    <link rel="shortcut icon" href="./imagens/pokebola.png" type="image/x-icon"> <!-- Ícone da página -->
+    <title>PokeCodeDawn</title> <!-- Título da página -->
   </head>
   <body>
     <div class="container">
       <div class="row"> <!-- Header -->
         <header >
           <nav>
-            <a href="https://www.instagram.com/code_alvorecer/" id="logo">PokeCodeDawn</a>
-            <div id="hamburguer" class="fa-solid fa-bars fa-xl" onclick="apresentaConteudo()"></div>
+            <a href="https://www.instagram.com/code_alvorecer/" id="logo">PokeCodeDawn</a> <!-- Logotipo -->
+            <div id="hamburguer" class="fa-solid fa-bars fa-xl" onclick="apresentaConteudo()"></div> <!-- Ícone do menu hamburguer -->
           </nav>
 
           <div id="conteudoCollapse">
             <div id="pesquisa">
-                <input type="text" id="input" placeholder="Pesquisar..." onkeyup="pesquisarPokemon()">
-                <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-lg"></i>
+                <input type="text" id="input" placeholder="Pesquisar..." onkeyup="pesquisarPokemon()"> <!-- Campo de pesquisa -->
+                <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-lg"></i> <!-- ìcone de lupa -->
             </div>
   
             <div id="filtro">
               <div id="nomeFiltro">
-                <div><i class="fa-solid fa-filter fa-sm"></i></div>
-                <span>Filtrar:</span>
+                <div><i class="fa-solid fa-filter fa-sm"></i></div> <!-- ìcone de filtro -->
+                <span>Filtrar:</span> <!-- Texto "Filtrar" -->
               </div>
     
               <div id="opcoesFiltro">
-                <select name="elemento" id="tipoElemento" onchange="filtrar()">
-                  <option value="Todos" selected>Todos</option>
+                <select name="elemento" id="tipoElemento" onchange="filtrar()"> <!-- Dropdown de opções de filtro -->
+                  <option value="Todos" selected>Todos</option> <!-- Opção padrão "Todos" -->
+                  <!-- Opções de filtro por tipo de elemento -->
                   <option value="Normal">Normal</option>
                   <option value="Lutador">Lutador</option>
                   <option value="Voador">Voador</option>
@@ -72,39 +73,42 @@
 
       <div class="row">
         <div id="pokedex" class="col-xl-7">
-          <div id="nenhumPokemon">Nenhum Pokémon Encontrado</div>
+          <div id="nenhumPokemon">Nenhum Pokémon Encontrado</div> <!-- Mensagem de nenhum Pokémon encontrado -->
         </div>
 
-        <div id="desconhecido" class="col-xl-5"></div>
+        <div id="desconhecido" class="col-xl-5"></div> <!-- Área para Pokémon desconhecido -->
 
         <div id="visualizarPokemon" class="col-xl-5">
           <div id="order">
-            <div id="seta" class="fa-solid fa-arrow-left fa-xl" onclick="voltar()"></div>
-            <div id="numeracao"></div>
+            <div id="seta" class="fa-solid fa-arrow-left fa-xl" onclick="voltar()"></div> <!-- Ícone de seta voltar -->
+            <div id="numeracao"></div> <!-- Espaço para o número do Pokémon -->
           </div>
-          <div id="pokemon"></div>
-          <span id="nome"></span>
+
+          <div id="pokemon"></div> <!-- Espaço para a imagem ou representação do Pokémon -->
+
+          <span id="nome"></span> <!-- Espaço apra o nome do Pokémon -->
       
-          <div id="natureza">
+          <div id="natureza"> <!-- Contêiner para as informações do tipo de Pokémon -->
             <div>Tipo:</div>
           </div>
   
           <div id="caracteristicas">
             <div id="peso">
-              <span id="valorPeso"></span>
-              <span id="nomePeso">Peso</span>
+              <span id="valorPeso"></span> <!-- Espaço para o peso do Pokémon -->
+              <span id="nomePeso">Peso</span> <!-- Rótulo para o peso -->
             </div>
             <div id="altura">
-              <span id="valorAltura"></span>
-              <span id="nomeAltura">Altura</span>
+              <span id="valorAltura"></span> <!-- Espaço para a altura do Pokémon -->
+              <span id="nomeAltura">Altura</span> <!-- Rótulo para a altura -->
             </div>
           </div>
       
           <div id="status">
-            <h5 class="titulo">Estado Básico</h5>
+            <h5 class="titulo">Estado Básico</h5> <!-- Título para as estatísticas básicas do Pokémon -->
   
             <div id="container">
               <div id="nomeStatus">
+                <!-- Contêiner para os rótulo das estatísticas -->
                 <div>HP:</div>
                 <div>ATK:</div>
                 <div>DEF:</div>
@@ -113,18 +117,27 @@
               </div>
     
               <div id="valorStatus">
+                <!-- Barra de progresso para o HP -->
                 <div class="progress">
                   <div id="hp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
                 </div>
+
+                <!-- Barra de progresso para o Ataque -->
                 <div class="progress">
                   <div id="ataque" class="progress-bar progress-bar-striped progress-bar-animated"></div>
                 </div>
+
+                <!-- Barra de progresso para a Defesa -->
                 <div class="progress">
                   <div id="defesa" class="progress-bar progress-bar-striped progress-bar-animated"></div>
                 </div>
+
+                <!-- Barra de progresso para a Velocidade -->
                 <div class="progress">
                   <div id="velocidade" class="progress-bar progress-bar-striped progress-bar-animated"></div>
                 </div>
+
+                <!-- Barra de progresso para a Experiência -->
                 <div class="progress">
                   <div id="exp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
                 </div>
@@ -133,18 +146,12 @@
           </div>  
                   
           <details id="descricao">
+            <!-- Contêiner para as informações do Pokémon -->
             <summary>Descrição</summary>
             <ul></ul>
           </details>
         </div>
       </div>
-
-      <!--<div class="row fixed-bottom">
-        <footer>
-          <div><img src="./imagens/code_alvorecer.png" alt="code_alvorecer" title="code_alvorecer"></div>
-          <div><a href="https://www.instagram.com/code_alvorecer/">code_alvorecer</a></div>
-        </footer>
-      </div>-->
     </div> 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
