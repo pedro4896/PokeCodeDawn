@@ -21,137 +21,180 @@
     <title>PokeCodeDawn</title> <!-- Título da página -->
   </head>
   <body>
-    <div class="container">
-      <div class="row"> <!-- Header -->
-        <header >
-          <nav>
-            <a href="https://www.instagram.com/code_alvorecer/" id="logo">PokeCodeDawn</a> <!-- Logotipo -->
-            <div id="hamburguer" class="fa-solid fa-bars fa-xl" onclick="apresentaConteudo()"></div> <!-- Ícone do menu hamburguer -->
-          </nav>
+    <div class="container-fluid">
+        <header class="row">
+            <button type="button" id="hamburguer" onclick="abrirFiltro()">
+                <img src="./imagens/collapse.svg">
+            </button>
 
-          <div id="conteudoCollapse">
-            <div id="pesquisa">
-                <input type="text" id="input" placeholder="Pesquisar..." onkeyup="pesquisarPokemon()"> <!-- Campo de pesquisa -->
-                <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-lg"></i> <!-- ìcone de lupa -->
+            <a id="logo" href="https://www.instagram.com/code_alvorecer/"><img src="./imagens/logo.svg" class="img-fluid"></a>
+
+            <button id="pesquisa" onclick="controlePesquisa()">
+                <img src="./imagens/busca.svg">
+            </button>
+
+            <div id="inputPesquisa" class="transicao-opacity">
+                <input id="input" onkeyup="pesquisarPokemon()" type="text" placeholder="Buscar...">
+                <button onclick="limparPesquisa()">
+                    <img src="./imagens/xmark-solid.svg">
+                </button>
             </div>
-  
+
             <div id="filtro">
-              <div id="nomeFiltro">
-                <div><i class="fa-solid fa-filter fa-sm"></i></div> <!-- ìcone de filtro -->
-                <span>Filtrar:</span> <!-- Texto "Filtrar" -->
-              </div>
-    
-              <div id="opcoesFiltro">
-                <select name="elemento" id="tipoElemento" onchange="filtrar()"> <!-- Dropdown de opções de filtro -->
-                  <option value="Todos" selected>Todos</option> <!-- Opção padrão "Todos" -->
-                  <!-- Opções de filtro por tipo de elemento -->
-                  <option value="Normal">Normal</option>
-                  <option value="Lutador">Lutador</option>
-                  <option value="Voador">Voador</option>
-                  <option value="Venenoso">Venenoso</option>
-                  <option value="Terrestre">Terrestre</option>
-                  <option value="Pedra">Pedra</option>
-                  <option value="Inseto">Inseto</option>
-                  <option value="Fantasma">Fantasma</option>
-                  <option value="Metálico">Metálico</option>
-                  <option value="Fogo">Fogo</option>
-                  <option value="Água">Água</option>
-                  <option value="Elétrico">Elétrico</option>
-                  <option value="Psíquico">Psíquico</option>
-                  <option value="Gelo">Gelo</option>
-                  <option value="Dragão">Dragão</option>
-                  <option value="Noturno">Noturno</option>
-                  <option value="Sombrio">Sombrio</option>
-                  <option value="Fada">Fada</option>
-                  <option value="Desconhecido">Desconhecido</option>
-                </select>
-              </div>
+                <button onclick="fecharFiltro()">
+                    <img src="./imagens/xmark-solid.svg">
+                </button>
+
+                <div>Filtrar por: Elemento</d>
+                <button class="opcoes"><span class="checkbox"></span><span>Água</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Desconhecido</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Dragão</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Elétrico</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Fada</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Fantasma</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Fogo</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Gelo</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Grama</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Inseto</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Lutador</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Metálico</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Noturno</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Normal</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Pedra</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Psíquico</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Sombrio</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Terrestre</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Venenoso</span></button>
+                <button class="opcoes"><span class="checkbox"></span><span>Voador</span></button>
             </div>
-          </div>
         </header>
-      </div> <!-- /Header -->
 
-      <div class="row">
-        <div id="pokedex" class="col-xl-7">
-          <div id="nenhumPokemon">Nenhum Pokémon Encontrado</div> <!-- Mensagem de nenhum Pokémon encontrado -->
-        </div>
-
-        <div id="desconhecido" class="col-xl-5"></div> <!-- Área para Pokémon desconhecido -->
-
-        <div id="visualizarPokemon" class="col-xl-5">
-          <div id="order">
-            <div id="seta" class="fa-solid fa-arrow-left fa-xl" onclick="voltar()"></div> <!-- Ícone de seta voltar -->
-            <div id="numeracao"></div> <!-- Espaço para o número do Pokémon -->
-          </div>
-
-          <div id="pokemon"></div> <!-- Espaço para a imagem ou representação do Pokémon -->
-
-          <span id="nome"></span> <!-- Espaço apra o nome do Pokémon -->
-      
-          <div id="natureza"> <!-- Contêiner para as informações do tipo de Pokémon -->
-            <div>Tipo:</div>
-          </div>
-  
-          <div id="caracteristicas">
-            <div id="peso">
-              <span id="valorPeso"></span> <!-- Espaço para o peso do Pokémon -->
-              <span id="nomePeso">Peso</span> <!-- Rótulo para o peso -->
+        <main class="row">
+            <div id="pokedex" class="col-xl-8">
+                <div id="nenhumPokemon"><h3>Nenhum Pokémon Encontrado</h3></div>
             </div>
-            <div id="altura">
-              <span id="valorAltura"></span> <!-- Espaço para a altura do Pokémon -->
-              <span id="nomeAltura">Altura</span> <!-- Rótulo para a altura -->
-            </div>
-          </div>
-      
-          <div id="status">
-            <h5 class="titulo">Estado Básico</h5> <!-- Título para as estatísticas básicas do Pokémon -->
-  
-            <div id="container">
-              <div id="nomeStatus">
-                <!-- Contêiner para os rótulo das estatísticas -->
-                <div>HP:</div>
-                <div>ATK:</div>
-                <div>DEF:</div>
-                <div>SPD:</div>
-                <div>EXP:</div>
-              </div>
+
+            <div id="visualizarPokemon" class="col-xl-4">
+                <div class="contain">
+                    <div class="nomenclatura">
+                        <span class="nome"></span>
+                        <span class="ordem"></span>
+                    </div>
     
-              <div id="valorStatus">
-                <!-- Barra de progresso para o HP -->
-                <div class="progress">
-                  <div id="hp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                    <div class="picture">
+                        <img class="picturePokemon">
+                    </div>
+
+                    <img src="./imagens/pokebola-opacity.svg" class="pictureBack">
                 </div>
 
-                <!-- Barra de progresso para o Ataque -->
-                <div class="progress">
-                  <div id="ataque" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                <div id="sobre">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="descricao-tab" data-toggle="tab" href="#descricao" role="tab" aria-controls="descricao" aria-selected="true">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="status-tab" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">Status</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="evolucao-tab" data-toggle="tab" href="#evolucao" role="tab" aria-controls="evolucao" aria-selected="false">Evolução</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="movimentacao-tab" data-toggle="tab" href="#movimentacao" role="tab" aria-controls="movimentacao" aria-selected="false">Moves</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="descricao" role="tabpanel" aria-labelledby="descricao-tab">
+                          <div class="contain-sobre">
+                            <div><span class="titulo"><i class="fa-solid fa-dna fa-sm" style="color: #747272;"></i>Espécie:</span><span class="especie"></span></div>
+                            <div><span class="titulo"><i class="fa-solid fa-up-down fa-sm" style="color: #747272;"></i>Altura:</span><span class="height"></span></div>
+                            <div><span class="titulo"><i class="fa-solid fa-weight-hanging fa-sm" style="color: #747272;"></i>Peso:</span><span class="weight"></span></div>
+                            <div><span class="titulo"><i class="fa-solid fa-meteor fa-rotate-270 fa-sm" style="color: #747272;"></i>Habilidades:</span><span class="habilidades"></span></div>
+                            <div><span class="titulo"><i class="fa-solid fa-egg fa-sm" style="color: #747272;"></i>Grupo de Ovos:</span><span class="ovos"></span></div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
+                          <div class="contain-sobre">
+                            <div>
+                              <span class="titulo">Vida:</span>
+                              <span>
+                                <div id="valorHP"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="hp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="titulo">Ataque:</span>
+                              <span>
+                                <div id="valorAtaque"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="ataque" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="titulo">Defesa:</span>
+                              <span>
+                                <div id="valorDefesa"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="defesa" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="titulo">Esp.Ataque:</span>
+                              <span>
+                                <div id="valorEspAtaque"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="espAtaque" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="titulo">Esp.Defesa:</span>
+                              <span>
+                                <div id="valorEspDefesa"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="espDefesa" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="titulo">Velocidade:</span>
+                              <span>
+                                <div id="valorVelocidade"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="velocidade" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="titulo">Total:</span>
+                              <span>
+                                <div id="valorTotal"><span>0</span></div>
+                                <div class="progress">
+                                  <div id="total" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
+                          <div class="contain-sobre"></div>
+                        </div>
+                        <div class="tab-pane fade" id="movimentacao" role="tabpanel" aria-labelledby="movimentacao-tab">
+                          <div class="accordion" id="acordeao"></div>
+                        </div>
+                      </div>
                 </div>
-
-                <!-- Barra de progresso para a Defesa -->
-                <div class="progress">
-                  <div id="defesa" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                </div>
-
-                <!-- Barra de progresso para a Velocidade -->
-                <div class="progress">
-                  <div id="velocidade" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                </div>
-
-                <!-- Barra de progresso para a Experiência -->
-                <div class="progress">
-                  <div id="exp" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                </div>
-              </div>
             </div>
-          </div>  
-                  
-          <details id="descricao">
-            <!-- Contêiner para as informações do Pokémon -->
-            <summary>Descrição</summary>
-            <ul></ul>
-          </details>
-        </div>
-      </div>
+        </main>
+
+        <footer class="row">
+            <h5>Footer</h5>
+        </footer>
+      
     </div> 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
@@ -161,6 +204,6 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/b7f8c2d908.js" crossorigin="anonymous"></script>
     <!-- Script Externo -->
-    <script src="./JavaScript/script.js"></script>
+    <script src="./JS/script.js"></script>
   </body>
 </html>

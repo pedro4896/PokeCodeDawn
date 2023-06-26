@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792.1 655.04">
+  <g id="Camada_1-2" data-name="Camada 1">
+    <g id="Layer_1" data-name="Layer 1">
+      <g>
+        <path d="M394.87,164.14c-16.41,0-30.44-10.34-35.94-24.85h-73.3c3.13,25.58,15.06,49.13,34.32,67.06s46.54,29.19,73.93,29.43c29.77,.26,57.8-11.21,78.82-32.24,17.55-17.55,28.45-39.99,31.41-64.25h-73.3c-5.5,14.5-19.53,24.85-35.94,24.85Z" style="fill: #f4f3f3; stroke: #000; stroke-miterlimit: 10; stroke-width: 5px;"/>
+        <circle cx="394.87" cy="125.86" r="25.13" style="fill: #f4f3f3; stroke: #000; stroke-miterlimit: 10; stroke-width: 5px;"/>
+        <path d="M319.92,45.27c-19.24,17.93-31.17,41.47-34.29,67.03h73.3c5.5-14.5,19.53-24.85,35.94-24.85s30.44,10.34,35.94,24.85h73.3c-2.97-24.26-13.86-46.7-31.41-64.25-21.04-21.04-49.09-32.51-78.88-32.24-27.39,.25-53.87,10.79-73.9,29.46Z" style="fill: #ed1c24; stroke: #000; stroke-miterlimit: 10; stroke-width: 5px;"/>
+        <path d="M394.87,2.5c-32.95,0-63.93,12.83-87.23,36.13-23.3,23.3-36.13,54.28-36.13,87.23s12.83,63.93,36.13,87.23c23.3,23.3,54.28,36.13,87.23,36.13s63.93-12.83,87.23-36.13c23.3-23.3,36.13-54.28,36.13-87.23s-12.83-63.93-36.13-87.23C458.8,15.33,427.82,2.5,394.87,2.5Zm77.83,201.04c-21.04,21.04-49.09,32.51-78.88,32.24-27.39-.25-53.87-10.79-73.9-29.46-19.24-17.93-31.17-41.47-34.29-67.03h73.3c5.5,14.5,19.53,24.85,35.94,24.85s30.44-10.34,35.94-24.85h73.3c-2.97,24.26-13.86,46.7-31.41,64.25Zm-102.96-77.68c0-13.86,11.27-25.13,25.13-25.13s25.13,11.27,25.13,25.13-11.27,25.13-25.13,25.13-25.13-11.27-25.13-25.13Zm60.77-13.58c-5.2-14.5-19.23-24.85-35.64-24.85s-30.44,10.34-35.94,23.86h-73.3c2.97-23.27,13.86-45.71,31.41-63.26,20.79-20.79,48.43-32.23,77.83-32.23s57.04,11.45,77.83,32.24c17.55,17.55,28.45,39.99,31.41,64.25h-73.6Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: 5px;"/>
+      </g>
+    </g>
+    <text transform="translate(8.98 399.53)" style="font-family: PokemonSolidNormal, &apos;Pokemon Solid&apos;; font-size: 161.86px; letter-spacing: .08em; stroke: #fff; stroke-miterlimit: 10; stroke-width: 5px;"><tspan x="0" y="0">PokeCode</tspan></text>
+    <text transform="translate(151.81 575.79)" style="font-family: PokemonSolidNormal, &apos;Pokemon Solid&apos;; font-size: 161.86px; letter-spacing: .08em; stroke: #fff; stroke-miterlimit: 10; stroke-width: 5px;"><tspan x="0" y="0">Dawn</tspan></text>
+  </g>
+</svg>
