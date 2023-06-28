@@ -129,17 +129,22 @@ header{
 
 #inputPesquisa input{
     height: 100%;
-    width: 93%;
+    width: 92%;
     background: transparent;
     border: 0;
     padding: 0;
+    padding-left: 5px;
     outline: none;
-    order: 1;
+    order: 2;
     color: #fff;
 }
 
 #inputPesquisa input::placeholder{
     color: #fff;
+}
+
+#inputPesquisa img{
+    height: 130%;
 }
 
 #inputPesquisa button{
@@ -152,12 +157,20 @@ header{
     border: 0;
     background: transparent;
     outline: 0;
-    order: 2;
+    order: 3;
     cursor: pointer;
 }
 
 #inputPesquisa button img{
     width: 100%;
+}
+
+.pokebolaEsquerda{
+    order: 1;
+}
+
+.pokebolaDireita{
+    order: 4;
 }
 
 #filtro{
@@ -245,7 +258,7 @@ header{
 
 main{
     width: 100vw;
-    height: 80vh;
+    height: 86vh;
     background-color: transparent;
     color: #F5F5F5;
 }
@@ -254,6 +267,7 @@ main{
     display: none;
     width: 100%;
     text-align: center;
+    color: #fff;
 }
 
 #pokedex{
@@ -288,7 +302,7 @@ main{
     flex-direction: column;
     justify-content: space-between;
     width: 32.5%;
-    height: 32%;
+    height: 200px;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -424,13 +438,32 @@ main{
     font-size: 16px;
 }
 
-#visualizarPokemon{
+#inicial{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
+}
+
+#inicial img{
+    height: 80%;
+}
+
+#inicial span{
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #fff;
+}
+
+#visualizarPokemon{
+    display: none;
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    width: 100%;
+    height: 100%;
     padding: 10px 10px 0px 2px;
     border-radius: 5px;
     background: transparent;
@@ -439,6 +472,10 @@ main{
 
 .contain{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 40%;
     border-radius: 5px 5px 0 0;
@@ -457,8 +494,11 @@ main{
 }
 
 #visualizarPokemon .picture{
-    width: 100%;
     height: 80%;
+}
+
+#visualizarPokemon .picturePokemon{
+    height: 100%;
 }
 
 #visualizarPokemon .pictureBack{
@@ -638,16 +678,64 @@ button.card-header.collapsed {
     width: 100%;
     padding: 0;
     height: 35px;
+    text-align: left;
+    padding-left: 10px;
     line-height: 0;
     background: transparent;
     border-radius: 0;
     outline: none;
 }
 
+#evolucao{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 600;
+    color: #000;
+}
+
+#valorEvolucao{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 600;
+    color: #000;
+}
+
+#evolucao div.item{
+    width: 80%;
+    height: 200px;
+}
+
+#evolucao div.item .picturePokemon{
+    width: 100%;
+    height: 120%;
+}
+
 footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
-    height: 10vh;
+    height: 4vh;
     background-color: transparent;
-    color: #808080;
-    border: 1px solid red;
+}
+
+footer a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 100%;
+}
+
+footer img{
+    width: 100%;
+    height: 100%;
 }

@@ -6,6 +6,8 @@ const hamburguer = document.getElementById('hamburguer');
 const filtro = document.getElementById('filtro');
 const checkbox = document.querySelectorAll('#filtro button.opcoes');
 const pokedex = document.getElementById('pokedex');
+const inicial = document.getElementById('inicial');
+const imgInicial = inicial.querySelector('img');
 // Cores dos tipos de Pokémon
 const cores = {
     Normal:[
@@ -94,10 +96,13 @@ const tipos = {
 }
 var controlCheck = false;
 var controlPesquisa = false;
+var controleInicial = false;
 var src; // Variável para armazenar o src
 var total; // Variável para armazenar o total
 var contador = 10000; // Variável de contador com valor incial de 10000
 var opcaoCheck = undefined;
+
+imgInicial.src = './imagens/pokemon'+numeroAleatorio()+'.svg';
 
 checkbox.forEach(element => {
     element.addEventListener("click",function(){
@@ -133,6 +138,11 @@ checkbox.forEach(element => {
 
     })
 });
+
+function numeroAleatorio(){
+    let random = Math.floor(Math.random() * 4); // Gera um número Aleatório de 0 a 1
+    return random;
+}
 
 function abrirFiltro(){
     filtro.style.display = 'flex';
@@ -202,7 +212,7 @@ function totalPokemon() {
 }
 
 function exibePokemon() {
-    for (let index = 1; index < 100; index++) {
+    for (let index = 1; index < 70; index++) {
         setTimeout(function(){
             // Verifica se o índice é maior ou igual a 1010
             if(index >= 1010){
@@ -231,10 +241,10 @@ function exibePokemon() {
                 // retorna uma das duas cores referentes ao tipo de Pokémon
                 let corBack = cores[entradaTipo.normalize("NFD").replace(/[\u0300-\u036f^`´~¨]/gi, "")][0];
 
-                if (data.sprites.other.dream_world.front_default != undefined){
-                    src = data.sprites.other.dream_world.front_default;  
-                }else if(data.sprites.other['official-artwork'].front_default != undefined){
-                    src = data.sprites.other['official-artwork'].front_default;
+                if (data.sprites.other['official-artwork'].front_default != undefined){
+                    src = data.sprites.other['official-artwork'].front_default;  
+                }else if(data.sprites.other.dream_world.front_default != undefined){
+                    src = data.sprites.other.dream_world.front_default;
                 }else{
                     src = './imagens/interrogacao.png';
                 }
@@ -369,7 +379,26 @@ function exibePokemon() {
 }
 
 function visualizarPokemon(item) {
+    if(controleInicial == false){
+        inicial.style.display = 'none';
+
+        const visualizarPokemon = document.getElementById('visualizarPokemon');
+        visualizarPokemon.style.display = 'flex';
+
+        controleInicial = true;
+    }
+
     atualizaElementos();
+    const menu = document.querySelectorAll('#sobre ul li a');
+    menu.forEach(element => {
+      element.classList.remove('active', 'show');  
+    });
+    
+    const evolucao_descricao = document.getElementById('descricao-tab');
+    evolucao_descricao.classList.add('active', 'show');
+    const descricao = document.getElementById('descricao');
+    descricao.classList.add('active', 'show');
+    
     // Obtém o número e a posição do Pokémon clicado
     const numeroPokemon = item.getAttribute('data-identificador_link');
     const posicaoPokemon = item.getAttribute('data-ordem');
@@ -383,10 +412,10 @@ function visualizarPokemon(item) {
         let src;
 
         // Verifica se existem sprites disponíveis e define a source (src) da imagem do Pokémon
-        if (data.sprites.other.dream_world.front_default != undefined){
-            src = data.sprites.other.dream_world.front_default;  
-        }else if(data.sprites.other['official-artwork'].front_default != undefined){
-            src = data.sprites.other['official-artwork'].front_default;
+        if (data.sprites.other['official-artwork'].front_default != undefined){
+            src = data.sprites.other['official-artwork'].front_default;  
+        }else if(data.sprites.other.dream_world.front_default != undefined){
+            src = data.sprites.other.dream_world.front_default;
         }else{
             src = './imagens/interrogacao.png';
         }
@@ -487,7 +516,7 @@ function visualizarPokemon(item) {
             card_header.setAttribute('aria-expanded', 'false');
             card_header.setAttribute('aria-controls', ('collapse_' + index));
             card_header.classList.add('card-header', 'collapsed');
-            card_header.textContent = data.moves[index].move.name.charAt(0).toUpperCase() + data.moves[index].move.name.slice(1);
+            card_header.textContent = '#'+ (index + 1) + ' ' +  data.moves[index].move.name.charAt(0).toUpperCase() + data.moves[index].move.name.slice(1);
             card.appendChild(card_header);
 
             const urlMove = data.moves[index].move.url;
@@ -528,9 +557,102 @@ function visualizarPokemon(item) {
                 }  
             }
             ovos.textContent = nomeOvos;
+
+            let valorEvolucao = document.getElementById('valorEvolucao');
+            const urlEvolution = data.evolution_chain.url;
+            requisitarDados(urlEvolution)
+            .then(data => {
+                const chain = data.chain;
+                const evolutions = obterEvolucoes(chain);
+
+                if (evolutions.length > 0) {
+                    evolutions.forEach(evolution => {
+                        filtraEvolucoes(evolution, nome);
+                    });
+                } else {
+                    valorEvolucao.textContent = 'Esse Pokémon não possui evolução!';
+                }
+            });
         });
     });
 }
+
+function filtraEvolucoes(cadeiaEvolutiva, nome) {
+    const palavraChave = nome.toLowerCase();
+
+    // Regex para identificar a palavra-chave e as palavras antes e depois dela
+    const regex = new RegExp(`(?:^|\\b(\\w+)\\b\\s*->\\s*)${palavraChave}\\s*(?:->\\s*(\\w+)\\b)?`, 'g');
+    let match;
+    while ((match = regex.exec(cadeiaEvolutiva)) !== null) {
+        const palavraAnterior = match[1];
+        const palavraPosterior = match[2];
+
+        exibeEvolucao(palavraPosterior);
+      
+        //console.log(`Palavra anterior: ${palavraAnterior}`);
+        //console.log(`Palavra posterior: ${palavraPosterior}`);
+    }
+}
+
+function exibeEvolucao(evolucao){
+    let valorEvolucao = document.getElementById('valorEvolucao');
+    const itens = pokedex.querySelectorAll('.item');
+    valorEvolucao.textContent = '';
+
+    if(evolucao === undefined){
+        valorEvolucao.textContent = 'Esse Pokémon não possui evolução!';
+    } else{
+        let encontrado = false;
+        itens.forEach(element => {
+            const nomePokemon = element.querySelector('.nome').textContent.toLowerCase();
+
+            if(nomePokemon == evolucao){
+                encontrado = true;
+                valorEvolucao.textContent = '';
+                let cloneItem = element.cloneNode(true);
+                valorEvolucao.appendChild(cloneItem);
+                valorEvolucao.addEventListener('click', function(){
+                    const evolucao_tab = document.getElementById('evolucao-tab');
+                    evolucao_tab.classList.remove('active', 'show');
+                    const evolucao = document.getElementById('evolucao');
+                    evolucao.classList.remove('active', 'show');
+
+                    const evolucao_descricao = document.getElementById('descricao-tab');
+                    evolucao_descricao.classList.add('active', 'show');
+                    const descricao = document.getElementById('descricao');
+                    descricao.classList.add('active', 'show');
+
+
+                    const item = this.querySelector('.item');
+                    visualizarPokemon(item);
+                });
+            }
+        });
+
+        if(!encontrado){
+            valorEvolucao.textContent = 'Não foi possível encontrar a evolução desse Pokémon.';
+        }
+    }
+}
+
+function obterEvolucoes(chain) {
+    const evolutions = [];
+    const speciesName = chain.species.name;
+  
+    if (chain.evolves_to.length > 0) {
+      chain.evolves_to.forEach(evolution => {
+        const nextEvolutions = obterEvolucoes(evolution);
+        nextEvolutions.forEach(nextEvolution => {
+          evolutions.push(`${speciesName} -> ${nextEvolution}`);
+        });
+      });
+    } else {
+      evolutions.push(speciesName);
+    }
+  
+    return evolutions;
+  }
+  
 
 function atualizaElementos() {
     let acordeao = document.getElementById('acordeao');

@@ -34,10 +34,12 @@
             </button>
 
             <div id="inputPesquisa" class="transicao-opacity">
-                <input id="input" onkeyup="pesquisarPokemon()" type="text" placeholder="Buscar...">
-                <button onclick="limparPesquisa()">
-                    <img src="./imagens/xmark-solid.svg">
-                </button>
+              <img src="./imagens/pokebolaEsquerda.svg" class="pokebolaEsquerda">
+              <input id="input" onkeyup="pesquisarPokemon()" type="text" placeholder="Buscar...">
+              <button onclick="limparPesquisa()">
+                  <img src="./imagens/xmark-solid.svg">
+              </button>
+              <img src="./imagens/pokebolaDireita.svg" class="pokebolaDireita">
             </div>
 
             <div id="filtro">
@@ -72,6 +74,11 @@
         <main class="row">
             <div id="pokedex" class="col-xl-8">
                 <div id="nenhumPokemon"><h3>Nenhum Pokémon Encontrado</h3></div>
+            </div>
+
+            <div id="inicial" class="col-xl-4">
+              <img>
+              <span>Nenhum Pokémon</span>
             </div>
 
             <div id="visualizarPokemon" class="col-xl-4">
@@ -181,7 +188,7 @@
                           </div>
                         </div>
                         <div class="tab-pane fade" id="evolucao" role="tabpanel" aria-labelledby="evolucao-tab">
-                          <div class="contain-sobre"></div>
+                          <div id="valorEvolucao"></div>
                         </div>
                         <div class="tab-pane fade" id="movimentacao" role="tabpanel" aria-labelledby="movimentacao-tab">
                           <div class="accordion" id="acordeao"></div>
@@ -192,7 +199,7 @@
         </main>
 
         <footer class="row">
-            <h5>Footer</h5>
+           <a href="https://www.instagram.com/code_alvorecer/"><img src="./imagens/codeAlvorecer.svg" alt=""></a> 
         </footer>
       
     </div> 
