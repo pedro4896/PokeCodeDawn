@@ -779,6 +779,7 @@ footer img{
 
     header{
         flex-direction: column;
+        justify-content: center;
     }
 
     #hamburguer{
@@ -790,8 +791,7 @@ footer img{
     }
 
     #logo{
-        transform: translateY(50%);
-        height: auto;
+        height: 50px;
         width: 64%;
     }
 
@@ -810,7 +810,6 @@ footer img{
     }
 
     #inputPesquisa{
-        transform: translateY(50%);
         width: 60%;
     }
 
@@ -866,6 +865,7 @@ footer img{
 
     header{
         flex-direction: column;
+        justify-content: center;
     }
 
     #hamburguer{
@@ -877,8 +877,7 @@ footer img{
     }
 
     #logo{
-        transform: translateY(20%);
-        height: auto;
+        height: 100px;
         width: 64%;
     }
 
@@ -897,7 +896,6 @@ footer img{
     }
 
     #inputPesquisa{
-        transform: translateY(50%);
         width: 60%;
     }
 
