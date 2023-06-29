@@ -141,7 +141,9 @@ checkbox.forEach(element => {
 
 // Verifica a posição do scroll e mostra ou oculta o botão
 pokedex.onscroll = function (){
-    showScrollTopButton();
+    if(window.innerWidth <= 991.98){
+        showScrollTopButton();
+    }
 }
 
 function showScrollTopButton(){
@@ -178,7 +180,7 @@ function fecharFiltro(){
 
 function controlePesquisa(){
     if (controlPesquisa == false) {
-        if(window.innerWidth <= 575.98){
+        if(window.innerWidth <= 991.98){
             logo.style.display = 'none';
         }
         inputPesquisa.style.display = 'flex';
@@ -190,7 +192,7 @@ function controlePesquisa(){
         inputPesquisa.style.opacity = 0;
         setTimeout(() => {
             inputPesquisa.style.display = 'none';
-            if(window.innerWidth <= 575.98){
+            if(window.innerWidth <= 991.98){
                 logo.style.display = 'flex';
             }
         }, 1000);
@@ -236,7 +238,7 @@ function totalPokemon() {
 }
 
 function exibePokemon() {
-    for (let index = 1; index < 70; index++) {
+    for (let index = 1; index < 22; index++) {
         setTimeout(function(){
             // Verifica se o índice é maior ou igual a 1010
             if(index >= 1010){
@@ -412,7 +414,7 @@ function voltar(){
 }
 
 function visualizarPokemon(item) {
-    if(window.innerWidth <= 575.98){
+    if(window.innerWidth <= 991.98){
         pokedex.style.display = 'none';
 
         const visualizarPokemon = document.getElementById('visualizarPokemon');
