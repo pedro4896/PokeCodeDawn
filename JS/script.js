@@ -238,7 +238,7 @@ function totalPokemon() {
 }
 
 function exibePokemon() {
-    for (let index = 1; index < 22; index++) {
+    for (let index = 1; index < 400; index++) {
         setTimeout(function(){
             // Verifica se o índice é maior ou igual a 1010
             if(index >= 1010){
