@@ -139,6 +139,24 @@ checkbox.forEach(element => {
     })
 });
 
+// Verifica a posição do scroll e mostra ou oculta o botão
+pokedex.onscroll = function (){
+    showScrollTopButton();
+}
+
+function showScrollTopButton(){
+    var scrollTopButton = document.getElementById('up');
+    if(pokedex.scrollTop > 20){
+        scrollTopButton.style.display = 'flex';
+    } else{
+        scrollTopButton.style.display = 'none';
+    }
+}
+
+function scrollToTop(){
+    pokedex.scrollTop = 0;
+}
+
 function numeroAleatorio(){
     let random = Math.floor(Math.random() * 4); // Gera um número Aleatório de 0 a 1
     return random;
@@ -160,6 +178,9 @@ function fecharFiltro(){
 
 function controlePesquisa(){
     if (controlPesquisa == false) {
+        if(window.innerWidth <= 575.98){
+            logo.style.display = 'none';
+        }
         inputPesquisa.style.display = 'flex';
         setTimeout(() => {
             inputPesquisa.style.opacity = 1;
@@ -169,6 +190,9 @@ function controlePesquisa(){
         inputPesquisa.style.opacity = 0;
         setTimeout(() => {
             inputPesquisa.style.display = 'none';
+            if(window.innerWidth <= 575.98){
+                logo.style.display = 'flex';
+            }
         }, 1000);
         controlPesquisa = false;
         limparPesquisa();
@@ -378,14 +402,33 @@ function exibePokemon() {
     }
 }
 
+function voltar(){
+    const visualizarPokemon = document.getElementById('visualizarPokemon');
+    visualizarPokemon.style.display = 'none';
+
+    pokedex.style.display = 'flex';
+
+    showScrollTopButton();
+}
+
 function visualizarPokemon(item) {
-    if(controleInicial == false){
-        inicial.style.display = 'none';
+    if(window.innerWidth <= 575.98){
+        pokedex.style.display = 'none';
 
         const visualizarPokemon = document.getElementById('visualizarPokemon');
         visualizarPokemon.style.display = 'flex';
 
-        controleInicial = true;
+        const up = document.getElementById('up');
+        up.style.display = 'none';
+    } else{
+        if(controleInicial == false){
+            inicial.style.display = 'none';
+    
+            const visualizarPokemon = document.getElementById('visualizarPokemon');
+            visualizarPokemon.style.display = 'flex';
+    
+            controleInicial = true;
+        }
     }
 
     atualizaElementos();
