@@ -122,6 +122,7 @@ checkbox.forEach(element => {
             controlCheck = true;
             input.value = '';
             filtrar();
+            scrollToTop();
         }else{
             opcaoCheck = undefined;
             let check = element.querySelector('span.checkbox');
@@ -134,6 +135,7 @@ checkbox.forEach(element => {
                 elemento.disabled = false;
             });
             filtrar();
+            scrollToTop();
         }
 
     })
@@ -238,7 +240,7 @@ function totalPokemon() {
 }
 
 function exibePokemon() {
-    for (let index = 1; index < 22; index++) {
+    for (let index = 1; index < 100; index++) {
         setTimeout(function(){
             // Verifica se o índice é maior ou igual a 1010
             if(index >= 1010){
@@ -438,9 +440,15 @@ function visualizarPokemon(item) {
     menu.forEach(element => {
       element.classList.remove('active', 'show');  
     });
-    
+
     const evolucao_descricao = document.getElementById('descricao-tab');
     evolucao_descricao.classList.add('active', 'show');
+
+    const divMenu = document.querySelectorAll('#myTabContent div');
+    divMenu.forEach(element => {
+      element.classList.remove('active', 'show');  
+    });
+    
     const descricao = document.getElementById('descricao');
     descricao.classList.add('active', 'show');
     

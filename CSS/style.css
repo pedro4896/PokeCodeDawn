@@ -775,6 +775,7 @@ footer img{
         outline: none;
         background: rgba(255, 2555, 255, 0.7);
         z-index: 5;
+        cursor: pointer;
     }
 
     header{
@@ -842,6 +843,7 @@ footer img{
         background-size: contain;
         background-repeat: no-repeat;
         transform: rotate(270deg);
+        cursor: pointer;
     }
 }
 
@@ -861,6 +863,7 @@ footer img{
         outline: none;
         background: rgba(255, 2555, 255, 0.7);
         z-index: 5;
+        cursor: pointer;
     }
 
     header{
@@ -939,6 +942,7 @@ footer img{
         background-size: contain;
         background-repeat: no-repeat;
         transform: rotate(270deg);
+        cursor: pointer;
     }
 
     #visualizarPokemon .nome,#visualizarPokemon .ordem{
