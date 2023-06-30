@@ -444,11 +444,11 @@ function visualizarPokemon(item) {
     const evolucao_descricao = document.getElementById('descricao-tab');
     evolucao_descricao.classList.add('active', 'show');
     
-    const divMenu = document.querySelectorAll('#sobre ul li a');
+    const divMenu = document.querySelectorAll('#myTabContent div');
     divMenu.forEach(element => {
       element.classList.remove('active', 'show');  
     });
-    
+
     const descricao = document.getElementById('descricao');
     descricao.classList.add('active', 'show');
     
